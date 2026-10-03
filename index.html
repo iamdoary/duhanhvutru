@@ -124,13 +124,7 @@
       color: #ef4444;
       text-shadow: 0 0 20px #ef4444;
       margin-bottom: 16px;
-      animation: blink 1s infinite alternate;
       letter-spacing: 1px;
-    }
-
-    @keyframes blink {
-      from { opacity: 0.8; }
-      to { opacity: 1; text-shadow: 0 0 30px #ef4444; }
     }
 
     .story-body {
@@ -273,7 +267,7 @@
       text-shadow: 0 0 10px #a855f7;
     }
 
-    /* CÂU HỎI (ĐÃ CĂN GIỮA NỘI DUNG) */
+    /* CÂU HỎI */
     .question-box {
       background: rgba(30, 41, 59, 0.8);
       border: 1px solid #38bdf8;
@@ -374,13 +368,6 @@
       border-radius: 50px;
       cursor: pointer;
       box-shadow: 0 0 35px #22c55e;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 20px #22c55e; }
-      50% { box-shadow: 0 0 45px #22c55e; }
-      100% { box-shadow: 0 0 20px #22c55e; }
     }
 
     /* HIỆU ỨNG TÀU 3D PHÓNG VŨ TRỤ */
@@ -659,7 +646,7 @@
         launchBtn.onclick = launchSpaceship;
       } else {
         launchBtn.style.background = "#ef4444";
-        launchBtn.innerText = "⚠️ ĐỘNG CƠ BỊ KẸT (NHIÊN LIỆU < 80%)";
+        launchBtn.innerText = "⚠️️ ĐỘNG CƠ BỊ KẸT (NHIÊN LIỆU < 80%)";
         launchBtn.onclick = showFailure;
       }
     }
