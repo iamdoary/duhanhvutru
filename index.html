@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>12A10: THE C12H22O11 HYPERDRIVE</title>
+  <title>Trạm Không Gian Vũ Trụ 12A10</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -14,120 +14,225 @@
     }
 
     body {
-      background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+      background: radial-gradient(circle at center, #0b0d19 0%, #02040a 100%);
       color: #fff;
       font-family: 'Roboto', sans-serif;
       min-height: 100vh;
+      overflow: hidden;
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
-      position: relative;
     }
 
-    /* Hiệu ứng không gian nền */
-    .stars {
+    /* Bầu trời sao động */
+    .space-background {
       position: absolute;
       width: 100%;
       height: 100%;
       background: url('https://www.transparenttextures.com/patterns/stardust.png');
-      opacity: 0.4;
+      opacity: 0.6;
       z-index: 1;
     }
 
-    /* Container chính */
-    .game-container {
-      position: relative;
-      z-index: 10;
-      width: 95%;
-      max-width: 1100px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 2px solid #38bdf8;
-      box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
-      border-radius: 20px;
-      padding: 25px;
-      backdrop-filter: blur(10px);
+    .planet-1 {
+      position: absolute;
+      top: 10%;
+      left: 5%;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle at 30% 30%, #a855f7, #3b0764);
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+      z-index: 2;
+      opacity: 0.8;
     }
 
-    /* Header */
-    .header {
+    .planet-2 {
+      position: absolute;
+      bottom: 15%;
+      right: 8%;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle at 30% 30%, #38bdf8, #0369a1);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+      z-index: 2;
+      opacity: 0.7;
+    }
+
+    /* MÀN HÌNH CHUNG */
+    .screen {
+      position: relative;
+      z-index: 10;
+      width: 90%;
+      max-width: 900px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 2px solid #38bdf8;
+      box-shadow: 0 0 40px rgba(56, 189, 248, 0.3);
+      border-radius: 20px;
+      padding: 35px;
+      backdrop-filter: blur(12px);
       text-align: center;
+      display: none;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* MÀN HÌNH 1: WELCOME */
+    .welcome-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 38px;
+      font-weight: 900;
+      color: #38bdf8;
+      text-shadow: 0 0 20px #38bdf8, 0 0 40px #a855f7;
+      letter-spacing: 3px;
+      margin-bottom: 25px;
+    }
+
+    .glow-btn {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 16px 40px;
+      color: #02040a;
+      background: #38bdf8;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 25px #38bdf8;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .glow-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 40px #38bdf8;
+      background: #7dd3fc;
+    }
+
+    /* MÀN HÌNH 2: STORY */
+    .alert-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 36px;
+      font-weight: 900;
+      color: #ef4444;
+      text-shadow: 0 0 20px #ef4444;
+      margin-bottom: 20px;
+      animation: blink 1s infinite alternate;
+    }
+
+    @keyframes blink {
+      from { opacity: 0.8; }
+      to { opacity: 1; text-shadow: 0 0 30px #ef4444; }
+    }
+
+    .story-body {
+      font-size: 17px;
+      line-height: 1.8;
+      color: #e2e8f0;
+      text-align: left;
+      background: rgba(30, 41, 59, 0.6);
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 4px solid #ef4444;
+      margin-bottom: 25px;
+    }
+
+    .story-body ul {
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+
+    /* MÀN HÌNH 3: GAMEPLAY */
+    .game-container {
+      max-width: 1100px;
+    }
+
+    .header {
       margin-bottom: 20px;
       border-bottom: 1px solid rgba(56, 189, 248, 0.2);
       padding-bottom: 15px;
     }
 
-    .title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 26px;
-      font-weight: 900;
-      color: #38bdf8;
-      text-shadow: 0 0 10px #38bdf8;
-      letter-spacing: 2px;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      color: #94a3b8;
-      margin-top: 5px;
-    }
-
     .status-bar {
       display: flex;
       justify-content: space-between;
-      margin-top: 15px;
       font-family: 'Orbitron', sans-serif;
       font-size: 16px;
-    }
-
-    .combo-badge {
-      color: #f59e0b;
-      text-shadow: 0 0 8px #f59e0b;
-    }
-
-    /* Bố cục Game */
-    .dashboard {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 25px;
       margin-top: 10px;
     }
 
-    /* Thanh nhiên liệu (Fuel Gauge) */
+    .dashboard {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    /* LÕI TÍM 3D & THANH NHIÊN LIỆU */
     .fuel-section {
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: rgba(30, 41, 59, 0.6);
-      padding: 15px;
-      border-radius: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(30, 41, 59, 0.5);
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      box-shadow: inset 0 0 15px rgba(168, 85, 247, 0.2);
     }
 
     .fuel-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 13px;
-      color: #a855f7;
-      margin-bottom: 10px;
-      text-align: center;
+      font-size: 14px;
+      color: #c084fc;
+      margin-bottom: 15px;
     }
 
-    .gauge-container {
+    /* Thiết kế Lõi Tím 3D */
+    .core-3d-capsule {
       position: relative;
-      width: 50px;
-      height: 250px;
-      background: #0f172a;
-      border: 2px solid #a855f7;
-      border-radius: 25px;
-      padding: 4px;
-      box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+      width: 70px;
+      height: 220px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+      border: 3px solid rgba(192, 132, 252, 0.8);
+      border-radius: 35px;
       overflow: hidden;
+      box-shadow: 0 0 25px rgba(168, 85, 247, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.3);
     }
 
-    /* Vạch mốc 80% */
+    .core-fill {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(0deg, #7e22ce 0%, #a855f7 50%, #c084fc 100%);
+      transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 30px #a855f7;
+    }
+
+    .core-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: #f0abfc;
+      box-shadow: 0 0 10px #f0abfc;
+    }
+
     .target-line {
       position: absolute;
-      top: 20%; /* (100 - 80)% */
+      top: 20%;
       left: 0;
       width: 100%;
       height: 2px;
@@ -136,54 +241,25 @@
       z-index: 5;
     }
 
-    .target-label {
-      position: absolute;
-      top: calc(20% - 18px);
-      right: 2px;
-      font-size: 10px;
-      color: #22c55e;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: bold;
-      z-index: 5;
-    }
-
-    .fuel-fill {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 0%;
-      background: linear-gradient(0deg, #ec4899 0%, #a855f7 100%);
-      transition: height 0.5s ease-in-out, background 0.5s ease;
-      box-shadow: 0 0 20px #a855f7;
-    }
-
     .fuel-percent {
       font-family: 'Orbitron', sans-serif;
-      font-size: 20px;
+      font-size: 24px;
       font-weight: bold;
       color: #c084fc;
       margin-top: 15px;
+      text-shadow: 0 0 10px #a855f7;
     }
 
-    /* Khung câu hỏi (Quiz Section) */
-    .quiz-section {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
+    /* CÂU HỎI */
     .question-box {
       background: rgba(30, 41, 59, 0.8);
       border: 1px solid #38bdf8;
-      border-radius: 12px;
+      border-radius: 15px;
       padding: 20px;
       min-height: 110px;
       font-size: 17px;
-      line-height: 1.5;
-      box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.1);
-      display: flex;
-      align-items: center;
+      line-height: 1.6;
+      text-align: left;
     }
 
     .options-grid {
@@ -198,61 +274,82 @@
       border: 1px solid rgba(56, 189, 248, 0.4);
       color: #e2e8f0;
       padding: 15px;
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 15px;
       cursor: pointer;
       text-align: left;
       transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
     }
 
     .option-btn:hover {
-      background: rgba(56, 189, 248, 0.2);
+      background: rgba(56, 189, 248, 0.25);
       border-color: #38bdf8;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
       transform: translateY(-2px);
     }
 
-    /* Nút khởi hành & Kết thúc */
-    .action-panel {
+    /* HOÀN THÀNH & TÀU PHÓNG */
+    .launch-panel {
       display: none;
-      text-align: center;
-      margin-top: 20px;
+      margin-top: 25px;
     }
 
-    .launch-btn {
+    .launch-btn-big {
       font-family: 'Orbitron', sans-serif;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 900;
-      padding: 18px 40px;
-      color: #030712;
+      padding: 20px 50px;
       background: #22c55e;
+      color: #02040a;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      box-shadow: 0 0 25px #22c55e;
+      box-shadow: 0 0 35px #22c55e;
       animation: pulse 1.5s infinite;
-      transition: transform 0.2s ease;
-    }
-
-    .launch-btn:hover {
-      transform: scale(1.05);
     }
 
     @keyframes pulse {
-      0% { box-shadow: 0 0 15px #22c55e; }
-      50% { box-shadow: 0 0 35px #22c55e; }
-      100% { box-shadow: 0 0 15px #22c55e; }
+      0% { box-shadow: 0 0 20px #22c55e; }
+      50% { box-shadow: 0 0 45px #22c55e; }
+      100% { box-shadow: 0 0 20px #22c55e; }
     }
 
-    /* Modal kết quả */
-    .modal-overlay {
+    /* HIỆU ỨNG TÀU 3D PHÓNG VŨ TRỤ */
+    .space-launch-stage {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: radial-gradient(circle at center, #0f172a 0%, #02040a 100%);
+      z-index: 500;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .ship-3d-wrapper {
+      position: absolute;
+      bottom: -300px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: transform 3.5s cubic-bezier(0.15, 0.85, 0.35, 1.2);
+    }
+
+    .ship-3d {
+      width: 140px;
+      filter: drop-shadow(0 0 25px #a855f7);
+    }
+
+    .ship-3d-wrapper.take-off {
+      transform: translate(-50%, -130vh) scale(0.4);
+    }
+
+    /* Modal Kết quả */
+    .result-modal {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(3, 7, 18, 0.95);
-      z-index: 100;
+      background: rgba(2, 4, 10, 0.95);
+      z-index: 600;
       justify-content: center;
       align-items: center;
       flex-direction: column;
@@ -262,219 +359,175 @@
 
     .modal-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 32px;
+      font-size: 34px;
       margin-bottom: 15px;
     }
 
     .modal-desc {
       font-size: 18px;
       color: #94a3b8;
-      max-width: 600px;
-      margin-bottom: 25px;
+      max-width: 650px;
+      margin-bottom: 30px;
       line-height: 1.6;
     }
 
-    .retry-btn {
-      font-family: 'Orbitron', sans-serif;
-      padding: 12px 30px;
-      background: #38bdf8;
-      border: none;
-      border-radius: 8px;
-      color: #030712;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 15px #38bdf8;
-    }
-
-    /* Hiệu ứng con tàu cất cánh */
-    .spaceship {
-      position: absolute;
-      bottom: -150px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      z-index: 200;
-      display: none;
-      transition: transform 3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .spaceship.take-off {
-      transform: translate(-50%, -120vh) scale(0.3);
-    }
-
-    .shake {
-      animation: shake 0.5s ease-in-out;
-    }
-
+    .shake { animation: shake 0.5s ease-in-out; }
     @keyframes shake {
       0%, 100% { transform: translate(0, 0); }
-      20% { transform: translate(-5px, 5px); }
-      40% { transform: translate(5px, -5px); }
-      60% { transform: translate(-5px, -5px); }
-      80% { transform: translate(5px, 5px); }
+      20% { transform: translate(-8px, 8px); }
+      40% { transform: translate(8px, -8px); }
+      60% { transform: translate(-8px, -8px); }
+      80% { transform: translate(8px, 8px); }
     }
 
     @media (max-width: 768px) {
       .dashboard { grid-template-columns: 1fr; }
-      .fuel-section { flex-direction: row; justify-content: space-around; }
-      .gauge-container { height: 180px; }
       .options-grid { grid-template-columns: 1fr; }
+      .welcome-title { font-size: 28px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="stars"></div>
+  <div class="space-background"></div>
+  <div class="planet-1"></div>
+  <div class="planet-2"></div>
 
-  <!-- Con tàu vũ trụ ẩn để chạy animation -->
-  <svg class="spaceship" id="spaceship" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 2R8 6 8 16L12 22L16 16 16 6Z"/>
-    <path d="M12 2v20"/>
-    <path d="M8 10H4l-2 4h6"/>
-    <path d="M16 10h4l2 4h-6"/>
-  </svg>
+  <!-- MÀN HÌNH 1: CHÀO MỪNG -->
+  <div class="screen active" id="welcomeScreen">
+    <div class="welcome-title">Trạm không gian vũ trụ 12A10</div>
+    <p style="color: #94a3b8; font-size: 18px;">Hệ thống kết nối phi thuyền sẵn sàng...</p>
+    <button class="glow-btn" onclick="goToStory()">Đi vào khám phá</button>
+  </div>
 
-  <div class="game-container" id="gameWindow">
+  <!-- MÀN HÌNH 2: CỐT TRUYỆN KHẨN CẤP -->
+  <div class="screen" id="storyScreen">
+    <div class="alert-title">Khẩn cấp, khẩn cấp!!!!</div>
+    <div class="story-body">
+      Tàu đang hết nhiên liệu, cần nạp liệu gấp để tàu cất cánh và đảm bảo tiến độ bay vào không gian. Để tàu cất cánh, các thuyền trưởng cần vượt qua những câu hỏi để nạp nhiên liệu, cách nạp nhiên liệu như sau:
+      <ul>
+        <li><b>Trả lời ĐÚNG câu hỏi:</b> Bơm 8% nhiên liệu vào Lõi tím.</li>
+        <li><b>Trả lời đúng 3 câu liên tiếp:</b> Từ câu trả lời đúng thứ 4 trở đi bơm 15% nhiên liệu vào bình.</li>
+        <li><b>Trả lời SAI:</b> Bị trừ 10% mỗi câu.</li>
+      </ul>
+      <br>
+      <i>Tàu sẽ cất cánh khi nhiên liệu đủ 80% trở lên, mong các phi hành gia trợ giúp!</i>
+    </div>
+    <button class="glow-btn" style="background: #22c55e; box-shadow: 0 0 25px #22c55e;" onclick="startGame()">Nạp nhiên liệu</button>
+  </div>
+
+  <!-- MÀN HÌNH 3: GAMEPLAY TRẮC NGHIỆM -->
+  <div class="screen game-container" id="gameScreen">
     <div class="header">
-      <div class="title">12A10: THE C₁₂H₂₂O₁₁ HYPERDRIVE</div>
-      <div class="subtitle">Sứ mệnh tổng hợp năng lượng Saccharose & Maltose đưa phi thuyền vượt vũ trụ</div>
+      <div style="font-family:'Orbitron'; font-size:22px; color:#38bdf8;">STARSHIP 12A10 HYPERDRIVE</div>
       <div class="status-bar">
         <div>CÂU HỎI: <span id="currentQ" style="color:#38bdf8">1</span>/10</div>
-        <div class="combo-badge" id="comboBadge">STREAK: x0 (+8%)</div>
+        <div id="comboBadge" style="color:#f59e0b;">STREAK: x0 (+8%)</div>
       </div>
     </div>
 
     <div class="dashboard">
-      <!-- Thanh Nhiên Liệu -->
+      <!-- Lõi Tím 3D -->
       <div class="fuel-section">
         <div class="fuel-title">LÕI TÍM NĂNG LƯỢNG</div>
-        <div class="gauge-container">
+        <div class="core-3d-capsule">
           <div class="target-line"></div>
-          <div class="target-label">80%</div>
-          <div class="fuel-fill" id="fuelBar"></div>
+          <div class="core-fill" id="fuelBar"></div>
         </div>
         <div class="fuel-percent" id="fuelText">0%</div>
       </div>
 
-      <!-- Khung Trắc Nghiệm -->
-      <div class="quiz-section">
+      <!-- Trắc nghiệm -->
+      <div>
         <div class="question-box" id="questionBox">Đang tải câu hỏi...</div>
         <div class="options-grid" id="optionsBox"></div>
 
-        <!-- Panel Khởi hành khi hết câu hỏi -->
-        <div class="action-panel" id="actionPanel">
-          <button class="launch-btn" id="launchBtn">🚀 KÍCH HOẠT KHỞI HÀNH</button>
+        <div class="launch-panel" id="launchPanel">
+          <button class="launch-btn-big" id="launchBtn">🚀 KÍCH HOẠT KHỞI HÀNH</button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- MÀN HÌNH TÀU 3D PHÓNG VŨ TRỤ (Xóa hết câu hỏi) -->
+  <div class="space-launch-stage" id="launchStage">
+    <div style="font-family:'Orbitron'; font-size:32px; color:#22c55e; text-shadow:0 0 20px #22c55e; margin-bottom: 20px;">
+      ĐỘNG CƠ QUANG TỐC KÍCH HOẠT!
+    </div>
+    <div class="ship-3d-wrapper" id="shipWrapper">
+      <!-- SVG Tàu Vũ Trụ 3D Siêu To -->
+      <svg class="ship-3d" viewBox="0 0 100 200" fill="none">
+        <path d="M50 0 L85 70 L75 160 L50 185 L25 160 L15 70 Z" fill="url(#shipBody)"/>
+        <path d="M50 0 L50 185 L75 160 L85 70 Z" fill="rgba(255,255,255,0.15)"/>
+        <!-- Cánh tàu -->
+        <path d="M15 80 L0 140 L25 130 Z" fill="#7e22ce"/>
+        <path d="M85 80 L100 140 L75 130 Z" fill="#6b21a8"/>
+        <!-- Buồng lái -->
+        <ellipse cx="50" cy="50" rx="12" ry="20" fill="#38bdf8"/>
+        <!-- Vệt lửa tím 3D -->
+        <path d="M35 185 L50 240 L65 185 Z" fill="url(#fireGlow)"/>
+        <defs>
+          <linearGradient id="shipBody" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#38bdf8"/>
+            <stop offset="100%" stop-color="#1e1b4b"/>
+          </linearGradient>
+          <linearGradient id="fireGlow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f0abfc"/>
+            <stop offset="50%" stop-color="#a855f7"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </div>
+
   <!-- Modal Kết Thúc -->
-  <div class="modal-overlay" id="resultModal">
+  <div class="result-modal" id="resultModal">
     <div class="modal-title" id="modalTitle"></div>
     <div class="modal-desc" id="modalDesc"></div>
-    <button class="retry-btn" onclick="location.reload()">🔄 THỰC HIỆN LẠI SỨ MỆNH</button>
+    <button class="glow-btn" onclick="location.reload()">🔄 THỰC HIỆN LẠI SỨ MỆNH</button>
   </div>
 
   <script>
-    // Dữ liệu bộ câu hỏi chuẩn xác
     const questions = [
-      {
-        q: "Câu 1. Saccharose được cấu tạo từ",
-        options: ["A. Hai đơn vị glucose.", "B. Một đơn vị glucose và một đơn vị fructose.", "C. Hai đơn vị fructose.", "D. Một glucose và một maltose."],
-        answer: 1
-      },
-      {
-        q: "Câu 2. Liên kết glycoside trong maltose là",
-        options: ["A. α-1,2-glycoside.", "B. α-1,4-glycoside.", "C. β-1,4-glycoside.", "D. α-1,6-glycoside."],
-        answer: 1
-      },
-      {
-        q: "Câu 3. Phát biểu nào sau đây đúng về saccharose và maltose?",
-        options: [
-          "A. Saccharose có vị đắng, còn maltose không có vị ngọt.",
-          "B. Saccharose là chất rắn vô định hình, không tan trong nước; maltose là chất lỏng.",
-          "C. Saccharose và maltose đều không tan trong nước ở nhiệt độ thường.",
-          "D. Saccharose và maltose đều là chất rắn kết tinh, đều tan tốt trong nước và đều có vị ngọt."
-        ],
-        answer: 3
-      },
-      {
-        q: "Câu 4. Saccharose thường được sử dụng chủ yếu trong",
-        options: ["A. Sản xuất thực phẩm.", "B. Sản xuất xà phòng.", "C. Sản xuất protein.", "D. Sản xuất kim loại."],
-        answer: 0
-      },
-      {
-        q: "Câu 5. Phát biểu nào sau đây sai?",
-        options: ["A. Saccharose có công thức C₁₂H₂₂O₁₁.", "B. Maltose có công thức C₁₂H₂₂O₁₁.", "C. Saccharose có tính khử.", "D. Maltose có tính khử."],
-        answer: 2
-      },
-      {
-        q: "Câu 6. Phản ứng của saccharose với Cu(OH)₂ ở nhiệt độ thường chứng tỏ saccharose có",
-        options: [
-          "A. Nhóm aldehyde.",
-          "B. Nhiều nhóm –OH có khả năng tạo phức với Cu(OH)₂.",
-          "C. Nhóm carboxyl.",
-          "D. Liên kết peptide."
-        ],
-        answer: 1
-      },
-      {
-        q: "Câu 7. Maltose có thể tham gia phản ứng tráng bạc vì",
-        options: [
-          "A. Maltose có nhiều nhóm –OH.",
-          "B. Maltose không bị thủy phân.",
-          "C. Maltose chứa fructose.",
-          "D. Maltose còn nhóm hemiacetal tự do nên có tính khử."
-        ],
-        answer: 3
-      },
-      {
-        q: "Câu 8. Khi thủy phân hoàn toàn saccharose, sản phẩm thu được là",
-        options: ["A. Hai glucose.", "B. Hai fructose.", "C. Glucose và fructose.", "D. Glucose và maltose."],
-        answer: 2
-      },
-      {
-        q: "Câu 9. Cho các phát biểu:\n(1) Saccharose có tính khử.\n(2) Maltose có tính khử.\n(3) Saccharose bị thủy phân tạo glucose và fructose.\n(4) Maltose bị thủy phân tạo hai glucose.\nSố phát biểu đúng là",
-        options: ["A. 1.", "B. 2.", "C. 3.", "D. 4."],
-        answer: 2
-      },
-      {
-        q: "Câu 10. Có 3 dung dịch riêng biệt: glucose, saccharose và maltose. Có thể dùng thuốc thử nào sau đây để phân biệt saccharose với glucose và maltose?",
-        options: [
-          "A. Cu(OH)₂ ở nhiệt độ thường.",
-          "B. Dung dịch AgNO₃/NH₃.",
-          "C. Cu(OH)₂ trong môi trường kiềm, đun nóng.",
-          "D. Dung dịch HCl."
-        ],
-        answer: 2
-      }
+      { q: "Câu 1. Saccharose được cấu tạo từ", options: ["A. Hai đơn vị glucose.", "B. Một đơn vị glucose và một đơn vị fructose.", "C. Hai đơn vị fructose.", "D. Một glucose và một maltose."], answer: 1 },
+      { q: "Câu 2. Liên kết glycoside trong maltose là", options: ["A. α-1,2-glycoside.", "B. α-1,4-glycoside.", "C. β-1,4-glycoside.", "D. α-1,6-glycoside."], answer: 1 },
+      { q: "Câu 3. Phát biểu nào sau đây đúng về saccharose và maltose?", options: ["A. Saccharose có vị đắng, còn maltose không có vị ngọt.", "B. Saccharose là chất rắn vô định hình, không tan trong nước; maltose là chất lỏng.", "C. Saccharose và maltose đều không tan trong nước ở nhiệt độ thường.", "D. Saccharose và maltose đều là chất rắn kết tinh, đều tan tốt trong nước và đều có vị ngọt."], answer: 3 },
+      { q: "Câu 4. Saccharose thường được sử dụng chủ yếu trong", options: ["A. Sản xuất thực phẩm.", "B. Sản xuất xà phòng.", "C. Sản xuất protein.", "D. Sản xuất kim loại."], answer: 0 },
+      { q: "Câu 5. Phát biểu nào sau đây sai?", options: ["A. Saccharose có công thức C₁₂H₂₂O₁₁.", "B. Maltose có công thức C₁₂H₂₂O₁₁.", "C. Saccharose có tính khử.", "D. Maltose có tính khử."], answer: 2 },
+      { q: "Câu 6. Phản ứng của saccharose với Cu(OH)₂ ở nhiệt độ thường chứng tỏ saccharose có", options: ["A. Nhóm aldehyde.", "B. Nhiều nhóm –OH có khả năng tạo phức với Cu(OH)₂.", "C. Nhóm carboxyl.", "D. Liên kết peptide."], answer: 1 },
+      { q: "Câu 7. Maltose có thể tham gia phản ứng tráng bạc vì", options: ["A. Maltose có nhiều nhóm –OH.", "B. Maltose không bị thủy phân.", "C. Maltose chứa fructose.", "D. Maltose còn nhóm hemiacetal tự do nên có tính khử."], answer: 3 },
+      { q: "Câu 8. Khi thủy phân hoàn toàn saccharose, sản phẩm thu được là", options: ["A. Hai glucose.", "B. Hai fructose.", "C. Glucose và fructose.", "D. Glucose và maltose."], answer: 2 },
+      { q: "Câu 9. Cho các phát biểu:\n(1) Saccharose có tính khử.\n(2) Maltose có tính khử.\n(3) Saccharose bị thủy phân tạo glucose và fructose.\n(4) Maltose bị thủy phân tạo hai glucose.\nSố phát biểu đúng là", options: ["A. 1.", "B. 2.", "C. 3.", "D. 4."], answer: 2 },
+      { q: "Câu 10. Có 3 dung dịch riêng biệt: glucose, saccharose và maltose. Có thể dùng thuốc thử nào sau đây để phân biệt saccharose với glucose và maltose?", options: ["A. Cu(OH)₂ ở nhiệt độ thường.", "B. Dung dịch AgNO₃/NH₃.", "C. Cu(OH)₂ trong môi trường kiềm, đun nóng.", "D. Dung dịch HCl."], answer: 2 }
     ];
 
     let currentIdx = 0;
     let fuelLevel = 0;
     let streakCount = 0;
 
-    const questionBox = document.getElementById("questionBox");
-    const optionsBox = document.getElementById("optionsBox");
-    const fuelBar = document.getElementById("fuelBar");
-    const fuelText = document.getElementById("fuelText");
-    const comboBadge = document.getElementById("comboBadge");
-    const currentQEl = document.getElementById("currentQ");
-    const actionPanel = document.getElementById("actionPanel");
-    const launchBtn = document.getElementById("launchBtn");
-    const resultModal = document.getElementById("resultModal");
-    const gameWindow = document.getElementById("gameWindow");
+    function goToStory() {
+      document.getElementById("welcomeScreen").classList.remove("active");
+      document.getElementById("storyScreen").classList.add("active");
+    }
+
+    function startGame() {
+      document.getElementById("storyScreen").classList.remove("active");
+      document.getElementById("gameScreen").classList.add("active");
+      loadQuestion();
+    }
 
     function loadQuestion() {
       if (currentIdx >= questions.length) {
-        finishGame();
+        finishQuiz();
         return;
       }
 
-      currentQEl.innerText = currentIdx + 1;
+      document.getElementById("currentQ").innerText = currentIdx + 1;
       const qData = questions[currentIdx];
-      questionBox.innerText = qData.q;
+      document.getElementById("questionBox").innerText = qData.q;
+
+      const optionsBox = document.getElementById("optionsBox");
       optionsBox.innerHTML = "";
 
       qData.options.forEach((opt, index) => {
@@ -487,18 +540,15 @@
     }
 
     function handleAnswer(selectedIndex) {
-      const correctIndex = questions[currentIdx].answer;
-
-      if (selectedIndex === correctIndex) {
+      if (selectedIndex === questions[currentIdx].answer) {
         streakCount++;
-        // Đúng từ câu thứ 4 trở đi thì bơm 15%, ngược lại 8%
         const addFuel = (streakCount >= 4) ? 15 : 8;
         fuelLevel = Math.min(100, fuelLevel + addFuel);
       } else {
-        // Sai nạp năng lượng độc hại: trừ 10% và reset streak
         streakCount = 0;
         fuelLevel = Math.max(0, fuelLevel - 10);
-        triggerShake();
+        document.getElementById("gameScreen").classList.add("shake");
+        setTimeout(() => document.getElementById("gameScreen").classList.remove("shake"), 500);
       }
 
       updateUI();
@@ -507,17 +557,10 @@
     }
 
     function updateUI() {
-      fuelBar.style.height = fuelLevel + "%";
-      fuelText.innerText = fuelLevel + "%";
+      document.getElementById("fuelBar").style.height = fuelLevel + "%";
+      document.getElementById("fuelText").innerText = fuelLevel + "%";
 
-      if (fuelLevel >= 80) {
-        fuelBar.style.background = "linear-gradient(0deg, #16a34a 0%, #22c55e 100%)";
-        fuelBar.style.boxShadow = "0 0 20px #22c55e";
-      } else {
-        fuelBar.style.background = "linear-gradient(0deg, #ec4899 0%, #a855f7 100%)";
-        fuelBar.style.boxShadow = "0 0 20px #a855f7";
-      }
-
+      const comboBadge = document.getElementById("comboBadge");
       if (streakCount >= 4) {
         comboBadge.innerText = `STREAK: x${streakCount} (SUPER CHARGE! +15%)`;
         comboBadge.style.color = "#22c55e";
@@ -527,61 +570,51 @@
       }
     }
 
-    function triggerShake() {
-      gameWindow.classList.add("shake");
-      setTimeout(() => gameWindow.classList.remove("shake"), 500);
-    }
+    function finishQuiz() {
+      document.getElementById("questionBox").innerText = "Đã hoàn thành toàn bộ câu hỏi kiểm tra năng lượng!";
+      document.getElementById("optionsBox").innerHTML = "";
+      document.getElementById("launchPanel").style.display = "block";
 
-    function finishGame() {
-      questionBox.innerText = "Sứ mệnh hoàn thành xong chuỗi câu hỏi năng lượng!";
-      optionsBox.innerHTML = "";
-      actionPanel.style.display = "block";
-
+      const launchBtn = document.getElementById("launchBtn");
       if (fuelLevel >= 80) {
-        launchBtn.style.background = "#22c55e";
-        launchBtn.style.color = "#030712";
         launchBtn.innerText = "🚀 KÍCH HOẠT KHỞI HÀNH";
-        launchBtn.onclick = startLaunchAnimation;
+        launchBtn.onclick = launchSpaceship;
       } else {
         launchBtn.style.background = "#ef4444";
-        launchBtn.style.color = "#fff";
         launchBtn.innerText = "⚠️ ĐỘNG CƠ BỊ KẸT (NHIÊN LIỆU < 80%)";
-        launchBtn.onclick = showFailureModal;
+        launchBtn.onclick = showFailure;
       }
     }
 
-    function startLaunchAnimation() {
-      actionPanel.style.display = "none";
-      triggerShake();
+    function launchSpaceship() {
+      // Ẩn màn hình trắc nghiệm, hiện bầu trời sao & tàu 3D
+      document.getElementById("gameScreen").classList.remove("active");
+      const stage = document.getElementById("launchStage");
+      stage.style.display = "flex";
 
-      const ship = document.getElementById("spaceship");
-      ship.style.display = "block";
+      const wrapper = document.getElementById("shipWrapper");
+      setTimeout(() => {
+        wrapper.classList.add("take-off");
+      }, 200);
 
       setTimeout(() => {
-        ship.classList.add("take-off");
-      }, 100);
-
-      setTimeout(() => {
-        showSuccessModal();
-      }, 3000);
+        showSuccess();
+      }, 3600);
     }
 
-    function showSuccessModal() {
-      document.getElementById("modalTitle").innerText = "🏆 SỨ MỆNH HOÀN THÀNH XUẤT SẮC!";
+    function showSuccess() {
+      document.getElementById("modalTitle").innerText = "🏆 SỨ MỆNH HOÀN THÀNH!";
       document.getElementById("modalTitle").style.color = "#22c55e";
-      document.getElementById("modalDesc").innerText = `Đồng Thuyền Trưởng 12A10 đã nạp thành công ${fuelLevel}% nhiên liệu tinh khiết! Động cơ Quang tốc đã cất cánh an toàn vào lòng vũ trụ.`;
-      resultModal.style.display = "flex";
+      document.getElementById("modalDesc").innerText = `Các Thuyền trưởng 12A10 đã nạp thành công ${fuelLevel}% nhiên liệu Lõi Tím! Phi thuyền 3D đã cất cánh an toàn vào vũ trụ bao la.`;
+      document.getElementById("resultModal").style.display = "flex";
     }
 
-    function showFailureModal() {
+    function showFailure() {
       document.getElementById("modalTitle").innerText = "💥 SỰ CỐ KHỞI HÀNH!";
       document.getElementById("modalTitle").style.color = "#ef4444";
-      document.getElementById("modalDesc").innerText = `Nhiên liệu tích lũy chỉ đạt ${fuelLevel}% (Dưới mốc an toàn 80%). Do chứa nhiều năng lượng độc hại từ các câu trả lời sai, phi thuyền 12A10 đã bị kẹt lại tại Trạm Không Gian!`;
-      resultModal.style.display = "flex";
+      document.getElementById("modalDesc").innerText = `Nhiên liệu chỉ đạt ${fuelLevel}% (Cần ít nhất 80%). Do ảnh hưởng từ năng lượng độc hại, tàu không đủ công suất cất cánh!`;
+      document.getElementById("resultModal").style.display = "flex";
     }
-
-    // Khởi chạy game
-    loadQuestion();
   </script>
 </body>
 </html>
