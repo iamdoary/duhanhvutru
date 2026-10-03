@@ -370,7 +370,7 @@
       box-shadow: 0 0 35px #22c55e;
     }
 
-    /* HIỆU ỨNG TÀU 3D PHÓNG VŨ TRỤ */
+    /* HIỆU ỨNG TÀU 3D PHÓNG VŨ TRỤ (SIÊU TO, DÀI & LƯỚT CHẬM) */
     .space-launch-stage {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -384,19 +384,21 @@
 
     .ship-3d-wrapper {
       position: absolute;
-      bottom: -300px;
+      bottom: -600px;
       left: 50%;
       transform: translateX(-50%);
-      transition: transform 3.5s cubic-bezier(0.15, 0.85, 0.35, 1.2);
+      /* Chỉnh thời gian bay chậm mượt hơn (6 giây) */
+      transition: transform 6s cubic-bezier(0.1, 0.6, 0.2, 1);
     }
 
     .ship-3d {
-      width: 140px;
-      filter: drop-shadow(0 0 25px #a855f7);
+      width: 280px; /* Tăng kích thước tàu cực to */
+      filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.8));
     }
 
     .ship-3d-wrapper.take-off {
-      transform: translate(-50%, -130vh) scale(0.4);
+      /* Tàu phóng từ từ vút lên qua màn hình */
+      transform: translate(-50%, -160vh) scale(0.9);
     }
 
     /* Modal Kết quả */
@@ -431,6 +433,7 @@
       .dashboard { grid-template-columns: 1fr; }
       .options-grid { grid-template-columns: 1fr; }
       .welcome-title { font-size: 26px; }
+      .ship-3d { width: 180px; }
     }
   </style>
 </head>
@@ -503,27 +506,60 @@
     </div>
   </div>
 
-  <!-- MÀN HÌNH TÀU 3D PHÓNG VŨ TRỤ -->
+  <!-- MÀN HÌNH TÀU 3D HOÀNH TRÁNG PHÓNG VŨ TRỤ -->
   <div class="space-launch-stage" id="launchStage">
-    <div style="font-size:30px; font-weight:800; color:#22c55e; text-shadow:0 0 20px #22c55e; margin-bottom: 20px;">
+    <div style="font-size:32px; font-weight:900; color:#22c55e; text-shadow:0 0 25px #22c55e; margin-bottom: 20px; letter-spacing: 1px;">
       ĐỘNG CƠ QUANG TỐC KÍCH HOẠT!
     </div>
     <div class="ship-3d-wrapper" id="shipWrapper">
-      <svg class="ship-3d" viewBox="0 0 100 200" fill="none">
-        <path d="M50 0 L85 70 L75 160 L50 185 L25 160 L15 70 Z" fill="url(#shipBody)"/>
-        <path d="M50 0 L50 185 L75 160 L85 70 Z" fill="rgba(255,255,255,0.15)"/>
-        <path d="M15 80 L0 140 L25 130 Z" fill="#7e22ce"/>
-        <path d="M85 80 L100 140 L75 130 Z" fill="#6b21a8"/>
-        <ellipse cx="50" cy="50" rx="12" ry="20" fill="#38bdf8"/>
-        <path d="M35 185 L50 240 L65 185 Z" fill="url(#fireGlow)"/>
+      <!-- Thiết kế Tàu Vũ Trụ 3D Siêu To, Dài & Nhiều Chi Tiết -->
+      <svg class="ship-3d" viewBox="0 0 100 260" fill="none">
+        <!-- Luồng lửa hào quang năng lượng tím 3D -->
+        <path d="M30 220 L50 260 L70 220 Z" fill="url(#outerFire)"/>
+        <path d="M40 220 L50 250 L60 220 Z" fill="url(#innerFire)"/>
+        
+        <!-- Động cơ đẩy 3D -->
+        <rect x="30" y="200" width="12" height="20" rx="3" fill="#334155"/>
+        <rect x="58" y="200" width="12" height="20" rx="3" fill="#334155"/>
+        <rect x="44" y="205" width="12" height="20" rx="3" fill="#475569"/>
+
+        <!-- Cánh phụ & Cánh chính 3D -->
+        <path d="M15 110 L0 180 L25 170 Z" fill="#6b21a8"/>
+        <path d="M85 110 L100 180 L75 170 Z" fill="#581c87"/>
+        <path d="M25 130 L5 200 L30 185 Z" fill="#a855f7"/>
+        <path d="M75 130 L95 200 L70 185 Z" fill="#7e22ce"/>
+
+        <!-- Thân tàu dài 3D -->
+        <path d="M50 0 L80 60 L72 210 L50 220 L28 210 L20 60 Z" fill="url(#shipMainBody)"/>
+        <!-- Đường bóng kim loại 3D -->
+        <path d="M50 0 L50 220 L72 210 L80 60 Z" fill="rgba(255, 255, 255, 0.12)"/>
+        
+        <!-- Buồng lái kính phản quang 3D -->
+        <ellipse cx="50" cy="65" rx="14" ry="30" fill="url(#cockpitGlow)"/>
+        <ellipse cx="47" cy="55" rx="5" ry="12" fill="rgba(255,255,255,0.6)"/>
+
+        <!-- Vòng lõi năng lượng tím ở thân tàu -->
+        <rect x="35" y="120" width="30" height="40" rx="6" fill="#1e1b4b" stroke="#c084fc" stroke-width="2"/>
+        <rect x="38" y="125" width="24" height="30" rx="4" fill="#a855f7" filter="drop-shadow(0 0 8px #a855f7)"/>
+
         <defs>
-          <linearGradient id="shipBody" x1="0" y1="0" x2="1" y2="1">
+          <linearGradient id="shipMainBody" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#38bdf8"/>
-            <stop offset="100%" stop-color="#1e1b4b"/>
+            <stop offset="40%" stop-color="#1e293b"/>
+            <stop offset="100%" stop-color="#0f172a"/>
           </linearGradient>
-          <linearGradient id="fireGlow" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id="cockpitGlow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#7dd3fc"/>
+            <stop offset="100%" stop-color="#0284c7"/>
+          </linearGradient>
+          <linearGradient id="outerFire" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#f0abfc"/>
             <stop offset="50%" stop-color="#a855f7"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </linearGradient>
+          <linearGradient id="innerFire" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="70%" stop-color="#e879f9"/>
             <stop offset="100%" stop-color="transparent"/>
           </linearGradient>
         </defs>
@@ -659,11 +695,12 @@
       const wrapper = document.getElementById("shipWrapper");
       setTimeout(() => {
         wrapper.classList.add("take-off");
-      }, 200);
+      }, 300);
 
+      // Kéo dài thời gian xem tàu lướt qua trước khi hiện thông báo
       setTimeout(() => {
         showSuccess();
-      }, 3600);
+      }, 6200);
     }
 
     function showSuccess() {
