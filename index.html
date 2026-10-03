@@ -66,16 +66,16 @@
       position: relative;
       z-index: 10;
       width: 90%;
-      max-width: 900px;
+      max-width: 850px;
       background: rgba(15, 23, 42, 0.85);
       border: 2px solid #38bdf8;
       box-shadow: 0 0 40px rgba(56, 189, 248, 0.3);
       border-radius: 20px;
-      padding: 35px;
+      padding: 28px 32px;
       backdrop-filter: blur(12px);
       text-align: center;
       display: none;
-      animation: fadeIn 0.8s ease forwards;
+      animation: fadeIn 0.6s ease forwards;
     }
 
     .screen.active {
@@ -83,26 +83,26 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
+      from { opacity: 0; transform: scale(0.96); }
       to { opacity: 1; transform: scale(1); }
     }
 
     /* MÀN HÌNH 1: WELCOME */
     .welcome-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 38px;
+      font-size: 36px;
       font-weight: 900;
       color: #38bdf8;
       text-shadow: 0 0 20px #38bdf8, 0 0 40px #a855f7;
-      letter-spacing: 3px;
-      margin-bottom: 25px;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
     }
 
     .glow-btn {
       font-family: 'Orbitron', sans-serif;
-      font-size: 20px;
+      font-size: 19px;
       font-weight: bold;
-      padding: 16px 40px;
+      padding: 14px 36px;
       color: #02040a;
       background: #38bdf8;
       border: none;
@@ -110,24 +110,25 @@
       cursor: pointer;
       box-shadow: 0 0 25px #38bdf8;
       transition: all 0.3s ease;
-      margin-top: 20px;
+      margin-top: 15px;
     }
 
     .glow-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 40px #38bdf8;
+      transform: scale(1.06);
+      box-shadow: 0 0 35px #38bdf8;
       background: #7dd3fc;
     }
 
     /* MÀN HÌNH 2: STORY */
     .alert-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 36px;
+      font-size: 32px;
       font-weight: 900;
       color: #ef4444;
       text-shadow: 0 0 20px #ef4444;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       animation: blink 1s infinite alternate;
+      letter-spacing: 1px;
     }
 
     @keyframes blink {
@@ -136,45 +137,50 @@
     }
 
     .story-body {
-      font-size: 17px;
-      line-height: 1.8;
+      font-size: 16px;
+      line-height: 1.6;
       color: #e2e8f0;
       text-align: left;
       background: rgba(30, 41, 59, 0.6);
-      padding: 20px;
+      padding: 18px 22px;
       border-radius: 12px;
       border-left: 4px solid #ef4444;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     .story-body ul {
       margin-left: 20px;
-      margin-top: 10px;
+      margin-top: 8px;
+      margin-bottom: 10px;
+    }
+
+    .story-body li {
+      margin-bottom: 4px;
     }
 
     /* MÀN HÌNH 3: GAMEPLAY */
     .game-container {
-      max-width: 1100px;
+      max-width: 1050px;
     }
 
     .header {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       border-bottom: 1px solid rgba(56, 189, 248, 0.2);
-      padding-bottom: 15px;
+      padding-bottom: 12px;
     }
 
     .status-bar {
       display: flex;
       justify-content: space-between;
       font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      margin-top: 10px;
+      font-size: 15px;
+      margin-top: 8px;
     }
 
     .dashboard {
       display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 30px;
+      grid-template-columns: 240px 1fr;
+      gap: 25px;
       align-items: center;
     }
 
@@ -184,7 +190,7 @@
       flex-direction: column;
       align-items: center;
       background: rgba(30, 41, 59, 0.5);
-      padding: 20px;
+      padding: 18px;
       border-radius: 20px;
       border: 1px solid rgba(168, 85, 247, 0.3);
       box-shadow: inset 0 0 15px rgba(168, 85, 247, 0.2);
@@ -192,16 +198,16 @@
 
     .fuel-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       color: #c084fc;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     /* Thiết kế Lõi Tím 3D */
     .core-3d-capsule {
       position: relative;
-      width: 70px;
-      height: 220px;
+      width: 65px;
+      height: 200px;
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
       border: 3px solid rgba(192, 132, 252, 0.8);
       border-radius: 35px;
@@ -243,10 +249,10 @@
 
     .fuel-percent {
       font-family: 'Orbitron', sans-serif;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
       color: #c084fc;
-      margin-top: 15px;
+      margin-top: 12px;
       text-shadow: 0 0 10px #a855f7;
     }
 
@@ -254,28 +260,28 @@
     .question-box {
       background: rgba(30, 41, 59, 0.8);
       border: 1px solid #38bdf8;
-      border-radius: 15px;
-      padding: 20px;
-      min-height: 110px;
-      font-size: 17px;
-      line-height: 1.6;
+      border-radius: 14px;
+      padding: 18px;
+      min-height: 100px;
+      font-size: 16.5px;
+      line-height: 1.5;
       text-align: left;
     }
 
     .options-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-top: 20px;
+      gap: 12px;
+      margin-top: 16px;
     }
 
     .option-btn {
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid rgba(56, 189, 248, 0.4);
       color: #e2e8f0;
-      padding: 15px;
-      border-radius: 12px;
-      font-size: 15px;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 14.5px;
       cursor: pointer;
       text-align: left;
       transition: all 0.2s ease;
@@ -291,14 +297,14 @@
     /* HOÀN THÀNH & TÀU PHÓNG */
     .launch-panel {
       display: none;
-      margin-top: 25px;
+      margin-top: 20px;
     }
 
     .launch-btn-big {
       font-family: 'Orbitron', sans-serif;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 900;
-      padding: 20px 50px;
+      padding: 18px 45px;
       background: #22c55e;
       color: #02040a;
       border: none;
@@ -359,15 +365,15 @@
 
     .modal-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 34px;
-      margin-bottom: 15px;
+      font-size: 32px;
+      margin-bottom: 12px;
     }
 
     .modal-desc {
-      font-size: 18px;
+      font-size: 17px;
       color: #94a3b8;
-      max-width: 650px;
-      margin-bottom: 30px;
+      max-width: 620px;
+      margin-bottom: 25px;
       line-height: 1.6;
     }
 
@@ -383,7 +389,7 @@
     @media (max-width: 768px) {
       .dashboard { grid-template-columns: 1fr; }
       .options-grid { grid-template-columns: 1fr; }
-      .welcome-title { font-size: 28px; }
+      .welcome-title { font-size: 26px; }
     }
   </style>
 </head>
@@ -396,21 +402,20 @@
   <!-- MÀN HÌNH 1: CHÀO MỪNG -->
   <div class="screen active" id="welcomeScreen">
     <div class="welcome-title">Trạm không gian vũ trụ 12A10</div>
-    <p style="color: #94a3b8; font-size: 18px;">Hệ thống kết nối phi thuyền sẵn sàng...</p>
+    <p style="color: #94a3b8; font-size: 17px;">Hệ thống kết nối phi thuyền sẵn sàng...</p>
     <button class="glow-btn" onclick="goToStory()">Đi vào khám phá</button>
   </div>
 
   <!-- MÀN HÌNH 2: CỐT TRUYỆN KHẨN CẤP -->
   <div class="screen" id="storyScreen">
-    <div class="alert-title">Khẩn cấp, khẩn cấp!!!!</div>
+    <div class="alert-title">KHẨN CẤP, KHẨN CẤP!!!!</div>
     <div class="story-body">
       Tàu đang hết nhiên liệu, cần nạp liệu gấp để tàu cất cánh và đảm bảo tiến độ bay vào không gian. Để tàu cất cánh, các thuyền trưởng cần vượt qua những câu hỏi để nạp nhiên liệu, cách nạp nhiên liệu như sau:
       <ul>
         <li><b>Trả lời ĐÚNG câu hỏi:</b> Bơm 8% nhiên liệu vào Lõi tím.</li>
-        <li><b>Trả lời đúng 3 câu liên tiếp:</b> Từ câu trả lời đúng thứ 4 trở đi bơm 15% nhiên liệu vào bình.</li>
+        <li><b>Trả lời ĐÚNG 3 CÂU LIÊN TIẾP:</b> Từ câu trả lời đúng thứ 4 trở đi bơm 15% nhiên liệu vào bình.</li>
         <li><b>Trả lời SAI:</b> Bị trừ 10% mỗi câu.</li>
       </ul>
-      <br>
       <i>Tàu sẽ cất cánh khi nhiên liệu đủ 80% trở lên, mong các phi hành gia trợ giúp!</i>
     </div>
     <button class="glow-btn" style="background: #22c55e; box-shadow: 0 0 25px #22c55e;" onclick="startGame()">Nạp nhiên liệu</button>
@@ -419,7 +424,7 @@
   <!-- MÀN HÌNH 3: GAMEPLAY TRẮC NGHIỆM -->
   <div class="screen game-container" id="gameScreen">
     <div class="header">
-      <div style="font-family:'Orbitron'; font-size:22px; color:#38bdf8;">STARSHIP 12A10 HYPERDRIVE</div>
+      <div style="font-family:'Orbitron'; font-size:20px; color:#38bdf8;">STARSHIP 12A10 HYPERDRIVE</div>
       <div class="status-bar">
         <div>CÂU HỎI: <span id="currentQ" style="color:#38bdf8">1</span>/10</div>
         <div id="comboBadge" style="color:#f59e0b;">STREAK: x0 (+8%)</div>
@@ -449,22 +454,18 @@
     </div>
   </div>
 
-  <!-- MÀN HÌNH TÀU 3D PHÓNG VŨ TRỤ (Xóa hết câu hỏi) -->
+  <!-- MÀN HÌNH TÀU 3D PHÓNG VŨ TRỤ -->
   <div class="space-launch-stage" id="launchStage">
-    <div style="font-family:'Orbitron'; font-size:32px; color:#22c55e; text-shadow:0 0 20px #22c55e; margin-bottom: 20px;">
+    <div style="font-family:'Orbitron'; font-size:30px; color:#22c55e; text-shadow:0 0 20px #22c55e; margin-bottom: 20px;">
       ĐỘNG CƠ QUANG TỐC KÍCH HOẠT!
     </div>
     <div class="ship-3d-wrapper" id="shipWrapper">
-      <!-- SVG Tàu Vũ Trụ 3D Siêu To -->
       <svg class="ship-3d" viewBox="0 0 100 200" fill="none">
         <path d="M50 0 L85 70 L75 160 L50 185 L25 160 L15 70 Z" fill="url(#shipBody)"/>
         <path d="M50 0 L50 185 L75 160 L85 70 Z" fill="rgba(255,255,255,0.15)"/>
-        <!-- Cánh tàu -->
         <path d="M15 80 L0 140 L25 130 Z" fill="#7e22ce"/>
         <path d="M85 80 L100 140 L75 130 Z" fill="#6b21a8"/>
-        <!-- Buồng lái -->
         <ellipse cx="50" cy="50" rx="12" ry="20" fill="#38bdf8"/>
-        <!-- Vệt lửa tím 3D -->
         <path d="M35 185 L50 240 L65 185 Z" fill="url(#fireGlow)"/>
         <defs>
           <linearGradient id="shipBody" x1="0" y1="0" x2="1" y2="1">
@@ -587,7 +588,6 @@
     }
 
     function launchSpaceship() {
-      // Ẩn màn hình trắc nghiệm, hiện bầu trời sao & tàu 3D
       document.getElementById("gameScreen").classList.remove("active");
       const stage = document.getElementById("launchStage");
       stage.style.display = "flex";
@@ -605,7 +605,7 @@
     function showSuccess() {
       document.getElementById("modalTitle").innerText = "🏆 SỨ MỆNH HOÀN THÀNH!";
       document.getElementById("modalTitle").style.color = "#22c55e";
-      document.getElementById("modalDesc").innerText = `Các Thuyền trưởng 12A10 đã nạp thành công ${fuelLevel}% nhiên liệu Lõi Tím! Phi thuyền 3D đã cất cánh an toàn vào vũ trụ bao la.`;
+      document.getElementById("modalDesc").innerText = `Các Thuyền trưởng 12A10 đã nạp thành công ${fuelLevel}% nhiên liệu Lõi Tím! Phi thuyền đã cất cánh an toàn vào vũ trụ bao la.`;
       document.getElementById("resultModal").style.display = "flex";
     }
 
