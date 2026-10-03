@@ -189,7 +189,7 @@
       align-items: center;
     }
 
-    /* THIẾT KẾ LÕI NHIÊN LIỆU 3D HÌNH TRỤ CHÂN THỰC */
+    /* LÕI TÍM 3D */
     .fuel-section {
       display: flex;
       flex-direction: column;
@@ -202,7 +202,7 @@
     }
 
     .fuel-title {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 800;
       color: #c084fc;
       margin-bottom: 14px;
@@ -218,7 +218,6 @@
       justify-content: center;
     }
 
-    /* Nắp trên & nắp dưới kim loại 3D */
     .cylinder-cap-top, .cylinder-cap-bottom {
       position: absolute;
       width: 100%;
@@ -233,7 +232,6 @@
     .cylinder-cap-top { top: -9px; }
     .cylinder-cap-bottom { bottom: -9px; }
 
-    /* Thân ống thủy tinh 3D */
     .cylinder-body {
       position: relative;
       width: 100%;
@@ -245,7 +243,6 @@
       overflow: hidden;
     }
 
-    /* Dung dịch nhiên liệu 3D */
     .cylinder-fill {
       position: absolute;
       bottom: 0;
@@ -256,7 +253,6 @@
       box-shadow: 0 0 25px #a855f7;
     }
 
-    /* Mặt cong tròn ở bề mặt chất lỏng (3D Menu effect) */
     .cylinder-fill::before {
       content: '';
       position: absolute;
@@ -269,18 +265,6 @@
       box-shadow: 0 0 10px #f0abfc;
     }
 
-    /* Vạch mốc 80% an toàn */
-    .target-line-3d {
-      position: absolute;
-      top: 20%;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: #22c55e;
-      box-shadow: 0 0 10px #22c55e;
-      z-index: 8;
-    }
-
     .fuel-percent {
       font-size: 22px;
       font-weight: 900;
@@ -289,7 +273,7 @@
       text-shadow: 0 0 10px #a855f7;
     }
 
-    /* CÂU HỎI */
+    /* CÂU HỎI & ĐÁP ÁN */
     .question-box {
       background: rgba(30, 41, 59, 0.8);
       border: 1px solid #38bdf8;
@@ -322,11 +306,53 @@
       transition: all 0.2s ease;
     }
 
-    .option-btn:hover {
+    .option-btn:hover:not(:disabled) {
       background: rgba(56, 189, 248, 0.25);
       border-color: #38bdf8;
       box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
       transform: translateY(-2px);
+    }
+
+    /* Class Đúng / Sai khi chọn */
+    .option-btn.correct {
+      background: #16a34a !important;
+      border-color: #22c55e !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 20px #22c55e !important;
+    }
+
+    .option-btn.wrong {
+      background: #dc2626 !important;
+      border-color: #ef4444 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 20px #ef4444 !important;
+    }
+
+    /* Bảng điều hướng nút Câu tiếp theo */
+    .next-panel {
+      display: none;
+      margin-top: 18px;
+      text-align: right;
+    }
+
+    .next-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 12px 30px;
+      background: #38bdf8;
+      color: #02040a;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #38bdf8;
+      transition: all 0.2s ease;
+    }
+
+    .next-btn:hover {
+      background: #7dd3fc;
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #38bdf8;
     }
 
     /* HOÀN THÀNH & TÀU PHÓNG */
@@ -466,13 +492,12 @@
     </div>
 
     <div class="dashboard">
-      <!-- Lõi Tím 3D Hình Trụ -->
+      <!-- Lõi Tím 3D -->
       <div class="fuel-section">
-        <div class="fuel-title">LÕI TÍM NĂNG LƯỢNG</div>
+        <div class="fuel-title">LÕI TÍM</div>
         <div class="cylinder-3d-container">
           <div class="cylinder-cap-top"></div>
           <div class="cylinder-body">
-            <div class="target-line-3d"></div>
             <div class="cylinder-fill" id="fuelBar"></div>
           </div>
           <div class="cylinder-cap-bottom"></div>
@@ -484,6 +509,11 @@
       <div>
         <div class="question-box" id="questionBox">Đang tải câu hỏi...</div>
         <div class="options-grid" id="optionsBox"></div>
+
+        <!-- Nút Câu tiếp theo -->
+        <div class="next-panel" id="nextPanel">
+          <button class="next-btn" onclick="nextQuestion()">CÂU TIẾP THEO ➔</button>
+        </div>
 
         <div class="launch-panel" id="launchPanel">
           <button class="launch-btn-big" id="launchBtn">🚀 KÍCH HOẠT KHỞI HÀNH</button>
@@ -562,6 +592,7 @@
         return;
       }
 
+      document.getElementById("nextPanel").style.display = "none";
       document.getElementById("currentQ").innerText = currentIdx + 1;
       const qData = questions[currentIdx];
       document.getElementById("questionBox").innerText = qData.q;
@@ -573,17 +604,27 @@
         const btn = document.createElement("button");
         btn.className = "option-btn";
         btn.innerText = opt;
-        btn.onclick = () => handleAnswer(index);
+        btn.onclick = () => handleAnswer(index, btn);
         optionsBox.appendChild(btn);
       });
     }
 
-    function handleAnswer(selectedIndex) {
-      if (selectedIndex === questions[currentIdx].answer) {
+    function handleAnswer(selectedIndex, clickedBtn) {
+      const correctIdx = questions[currentIdx].answer;
+      const allButtons = document.querySelectorAll(".option-btn");
+
+      // Khóa tất cả các nút
+      allButtons.forEach(btn => btn.disabled = true);
+
+      if (selectedIndex === correctIdx) {
+        clickedBtn.classList.add("correct");
         streakCount++;
         const addFuel = (streakCount >= 4) ? 15 : 8;
         fuelLevel = Math.min(100, fuelLevel + addFuel);
       } else {
+        clickedBtn.classList.add("wrong");
+        // Hiện đáp án đúng màu xanh
+        allButtons[correctIdx].classList.add("correct");
         streakCount = 0;
         fuelLevel = Math.max(0, fuelLevel - 10);
         document.getElementById("gameScreen").classList.add("shake");
@@ -591,6 +632,11 @@
       }
 
       updateUI();
+      // Hiện nút Câu tiếp theo
+      document.getElementById("nextPanel").style.display = "block";
+    }
+
+    function nextQuestion() {
       currentIdx++;
       loadQuestion();
     }
@@ -612,6 +658,7 @@
     function finishQuiz() {
       document.getElementById("questionBox").innerText = "Đã hoàn thành toàn bộ câu hỏi kiểm tra năng lượng!";
       document.getElementById("optionsBox").innerHTML = "";
+      document.getElementById("nextPanel").style.display = "none";
       document.getElementById("launchPanel").style.display = "block";
 
       const launchBtn = document.getElementById("launchBtn");
