@@ -379,13 +379,12 @@
       flex-direction: column;
     }
 
-    /* MẶC ĐỊNH ẨN HOÀN TOÀN 100% KHÔNG THẤY CÁI GÌ CỦA TÊN LỬA */
+    /* TÊN LỬA BAN ĐẦU GIẤU CỰC SÂU DƯỚI ĐÁY (100% TRỐNG TRẢI) */
     .ship-3d-wrapper {
       position: absolute;
-      bottom: -600px;
+      bottom: -650px;
       left: 50%;
       transform: translateX(-50%);
-      display: none; /* ẨN BIẾN LÚC ĐẦU */
     }
 
     .ship-3d {
@@ -393,18 +392,31 @@
       filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.5));
     }
 
-    /* TRỒI LÊN TỪ TỪ ĐỂ HIỆN FULL NGUYÊN HÌNH TÊN LỬA */
-    .ship-3d-wrapper.slow-appear {
-      display: block;
-      transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-      transform: translate(-50%, -620px);
+    /* CHUYỂN ĐỘNG THEO YÊU CẦU:
+       0s -> 1.5s: Ẩn tịt dưới đáy (không có tên lửa)
+       1.5s -> 3.2s: Từ từ nhô lên trọn vẹn toàn bộ tên lửa
+       3.2s trở đi: Kích hoạt gia tốc tối đa phóng vụt mất hút
+    */
+    .ship-3d-wrapper.start-launch {
+      animation: rocketExactSequence 4.5s ease-in-out forwards;
     }
 
-    /* TĂNG TỐC PHÓNG BỨT PHÁ BAY MẤT HẲN */
-    .ship-3d-wrapper.fast-launch {
-      display: block;
-      transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-      transform: translate(-50%, -240vh);
+    @keyframes rocketExactSequence {
+      /* Từ 0s đến 33% (tương đương 1.5s đầu tiên): Tên lửa giữ nguyên giấu dưới đáy */
+      0% {
+        transform: translate(-50%, 0px);
+      }
+      33.33% {
+        transform: translate(-50%, 0px);
+      }
+      /* Từ 33.33% đến 70% (từ 1.5s đến ~3.1s): Nhô lên từ từ hiện trọn 100% nguyên tên lửa */
+      70% {
+        transform: translate(-50%, -660px);
+      }
+      /* Từ 70% đến 100%: Phóng bứt phá tốc độ biến mất hẳn lên bầu trời */
+      100% {
+        transform: translate(-50%, -250vh);
+      }
     }
 
     /* Modal Kết quả */
@@ -660,22 +672,15 @@
 
       const wrapper = document.getElementById("shipWrapper");
 
-      // BƯỚC 1: Đợi đúng 1.5 giây đầu tiên (màn hình hoàn toàn không có tên lửa)
+      // Kích hoạt chuỗi chuyển động chuẩn khớp thời gian
       setTimeout(() => {
-        // Tên lửa bắt đầu xuất hiện từ từ ngoi lên từ đáy
-        wrapper.classList.add("slow-appear");
-      }, 1500);
+        wrapper.classList.add("start-launch");
+      }, 50);
 
-      // BƯỚC 2: Sau khi xuất hiện đủ nguyên hình (1.5s + 1.5s = 3.0s), bứt phá tăng tốc
-      setTimeout(() => {
-        wrapper.classList.remove("slow-appear");
-        wrapper.classList.add("fast-launch");
-      }, 3000);
-
-      // BƯỚC 3: Mở modal kết quả chúc mừng
+      // Hiển thị modal thành công sau khi tên lửa phóng vút lên hoàn tất
       setTimeout(() => {
         showSuccess();
-      }, 4800);
+      }, 4600);
     }
 
     function showSuccess() {
