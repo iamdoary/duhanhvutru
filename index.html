@@ -367,7 +367,7 @@
       box-shadow: 0 0 35px #22c55e;
     }
 
-    /* MÀN HÌNH TÊN LỬA TĂNG TỐC (CHẬM LÚC ĐẦU -> TĂNG TỐC NHANH DẦN) */
+    /* MÀN HÌNH MÔ PHỎNG BAY */
     .space-launch-stage {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -379,13 +379,14 @@
       flex-direction: column;
     }
 
+    /* ẨN TÊN LỬA HOÀN TOÀN BÊN DƯỚI KHUNG HÌNH BAN ĐẦU */
     .ship-3d-wrapper {
       position: absolute;
-      bottom: -700px;
+      bottom: -850px; /* Đặt thật sâu xuống dưới để lúc đầu không hề xuất hiện */
       left: 50%;
       transform: translateX(-50%);
-      /* Hiệu ứng: Chậm lúc đầu, khi xuất hiện hết thì gia tốc cực nhanh */
-      transition: transform 5.5s cubic-bezier(0.55, 0.05, 0.9, 0.4);
+      /* Chậm lúc trồi lên -> Tăng tốc gia tốc cực nhanh */
+      transition: transform 6s cubic-bezier(0.5, 0.05, 0.85, 0.35);
     }
 
     .ship-3d {
@@ -394,7 +395,7 @@
     }
 
     .ship-3d-wrapper.take-off {
-      transform: translate(-50%, -230vh);
+      transform: translate(-50%, -250vh); /* Bay vụt qua hẳn mép trên màn hình */
     }
 
     /* Modal Kết quả */
@@ -502,7 +503,7 @@
     </div>
   </div>
 
-  <!-- MÀN HÌNH TÊN LỬA VŨ TRỤ BAY CHẬM BAN ĐẦU RỒI PHÓNG NHANH -->
+  <!-- MÀN HÌNH TÊN LỬA TỪ TỪ XUẤT HIỆN TỪ ĐÁY VÀ PHÓNG BỨT PHÁ -->
   <div class="space-launch-stage" id="launchStage">
     <div class="ship-3d-wrapper" id="shipWrapper">
       <svg class="ship-3d" viewBox="0 0 200 420" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
@@ -650,15 +651,15 @@
 
       const wrapper = document.getElementById("shipWrapper");
 
-      // Khởi động phóng tên lửa
+      // Khởi động tên lửa từ từ trồi lên từ dưới đáy
       setTimeout(() => {
         wrapper.classList.add("take-off");
       }, 300);
 
-      // Chờ 5.8 giây sau khi tên lửa gia tốc nhanh và biến mất hẳn để hiện bảng chúc mừng
+      // Chờ tên lửa gia tốc nhanh phóng khỏi màn hình rồi hiện bảng hoàn thành
       setTimeout(() => {
         showSuccess();
-      }, 5800);
+      }, 6200);
     }
 
     function showSuccess() {
