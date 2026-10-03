@@ -379,14 +379,12 @@
       flex-direction: column;
     }
 
-    /* ĐẶT TÊN LỬA SÂU BÊN DƯỚI VÀ TRỒI LÊN TRONG ~1S */
+    /* ĐẶT TÊN LỬA ẨN BÊN DƯỚI ĐÁY */
     .ship-3d-wrapper {
       position: absolute;
-      bottom: -1000px;
+      bottom: -600px;
       left: 50%;
       transform: translateX(-50%);
-      /* Nhô lên cực nhanh tầm 1s rồi vút qua màn hình */
-      transition: transform 3.8s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
 
     .ship-3d {
@@ -394,7 +392,15 @@
       filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.5));
     }
 
-    .ship-3d-wrapper.take-off {
+    /* PHẦN 1: CHẬM CHẬM LÊN TRONG 1.5 GIÂY (HIỆN NGUYÊN NGUYÊN TÊN LỬA) */
+    .ship-3d-wrapper.slow-appear {
+      transition: transform 1.5s ease-out;
+      transform: translate(-50%, -620px); /* Lên vừa đủ hiện nguyên toàn bộ tên lửa */
+    }
+
+    /* PHẦN 2: BẮT ĐẦU TĂNG TỐC PHÓNG VÚT LÊN MẤT HẲN */
+    .ship-3d-wrapper.fast-launch {
+      transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1);
       transform: translate(-50%, -260vh);
     }
 
@@ -503,7 +509,7 @@
     </div>
   </div>
 
-  <!-- MÀN HÌNH TÊN LỬA VŨ TRỤ TRỒI LÊN SAU 1S -->
+  <!-- MÀN HÌNH TÊN LỬA VŨ TRỤ CHẬM 1.5S RỒI PHÓNG NHANH -->
   <div class="space-launch-stage" id="launchStage">
     <div class="ship-3d-wrapper" id="shipWrapper">
       <svg class="ship-3d" viewBox="0 0 200 420" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
@@ -651,15 +657,21 @@
 
       const wrapper = document.getElementById("shipWrapper");
 
-      // Khởi động cất cánh ngay lập tức
+      // Bước 1: 1.5 giây đầu trồi lên chậm rãi hiện full nguyên tên lửa
       setTimeout(() => {
-        wrapper.classList.add("take-off");
+        wrapper.classList.add("slow-appear");
       }, 100);
 
-      // 4.2 giây sau hiện modal thành công
+      // Bước 2: Sau 1.5 giây (khi hiện đủ nguyên hình), kích hoạt gia tốc nhanh bứt phá
+      setTimeout(() => {
+        wrapper.classList.remove("slow-appear");
+        wrapper.classList.add("fast-launch");
+      }, 1600);
+
+      // Bước 3: Sau khi tên lửa vút đi xong thì mở modal chúc mừng
       setTimeout(() => {
         showSuccess();
-      }, 4200);
+      }, 3400);
     }
 
     function showSuccess() {
