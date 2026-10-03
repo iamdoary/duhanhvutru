@@ -367,7 +367,7 @@
       box-shadow: 0 0 35px #22c55e;
     }
 
-    /* MÀN HÌNH TÊN LỬA BAY THẲNG */
+    /* MÀN HÌNH TÊN LỬA TĂNG TỐC (CHẬM LÚC ĐẦU -> TĂNG TỐC NHANH DẦN) */
     .space-launch-stage {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -384,7 +384,8 @@
       bottom: -700px;
       left: 50%;
       transform: translateX(-50%);
-      transition: transform 10s cubic-bezier(0.1, 0.5, 0.2, 1);
+      /* Hiệu ứng: Chậm lúc đầu, khi xuất hiện hết thì gia tốc cực nhanh */
+      transition: transform 5.5s cubic-bezier(0.55, 0.05, 0.9, 0.4);
     }
 
     .ship-3d {
@@ -393,7 +394,7 @@
     }
 
     .ship-3d-wrapper.take-off {
-      transform: translate(-50%, -220vh);
+      transform: translate(-50%, -230vh);
     }
 
     /* Modal Kết quả */
@@ -501,7 +502,7 @@
     </div>
   </div>
 
-  <!-- MÀN HÌNH TÊN LỬA VŨ TRỤ BAY THẲNG SLOW-MOTION -->
+  <!-- MÀN HÌNH TÊN LỬA VŨ TRỤ BAY CHẬM BAN ĐẦU RỒI PHÓNG NHANH -->
   <div class="space-launch-stage" id="launchStage">
     <div class="ship-3d-wrapper" id="shipWrapper">
       <svg class="ship-3d" viewBox="0 0 200 420" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
@@ -649,15 +650,15 @@
 
       const wrapper = document.getElementById("shipWrapper");
 
-      // Khởi động chuyển động cho tên lửa
+      // Khởi động phóng tên lửa
       setTimeout(() => {
         wrapper.classList.add("take-off");
       }, 300);
 
-      // 10.2 giây sau hiện modal kết quả sứ mệnh thành công
+      // Chờ 5.8 giây sau khi tên lửa gia tốc nhanh và biến mất hẳn để hiện bảng chúc mừng
       setTimeout(() => {
         showSuccess();
-      }, 10200);
+      }, 5800);
     }
 
     function showSuccess() {
