@@ -379,12 +379,13 @@
       flex-direction: column;
     }
 
-    /* TÊN LỬA BAN ĐẦU GIẤU CỰC SÂU DƯỚI ĐÁY (100% TRỐNG TRẢI) */
+    /* BAN ĐẦU DÙNG VISIBILITY HIDDEN VÀ TRANSLATEY(100VH) GIẤU HẲN 100% XUỐNG ĐÁY MÀN HÌNH */
     .ship-3d-wrapper {
       position: absolute;
-      bottom: -650px;
+      bottom: 0;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, 100vh);
+      visibility: hidden; /* ĐẢM BẢO TÀNG HÌNH HOÀN TOÀN LÚC ĐẦU */
     }
 
     .ship-3d {
@@ -392,30 +393,31 @@
       filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.5));
     }
 
-    /* CHUYỂN ĐỘNG THEO YÊU CẦU:
-       0s -> 1.5s: Ẩn tịt dưới đáy (không có tên lửa)
-       1.5s -> 3.2s: Từ từ nhô lên trọn vẹn toàn bộ tên lửa
-       3.2s trở đi: Kích hoạt gia tốc tối đa phóng vụt mất hút
+    /* ANIMATION CHUẨN XÁC:
+       0s -> 1.5s: Giữ tàng hình + ẩn dưới đáy
+       1.5s -> 3.2s: Hiện lên và từ từ ngoi lên trọn vẹn toàn bộ tên lửa
+       3.2s trở đi: Kích hoạt gia tốc tối đa phóng vút mất hút
     */
     .ship-3d-wrapper.start-launch {
       animation: rocketExactSequence 4.5s ease-in-out forwards;
     }
 
     @keyframes rocketExactSequence {
-      /* Từ 0s đến 33% (tương đương 1.5s đầu tiên): Tên lửa giữ nguyên giấu dưới đáy */
       0% {
-        transform: translate(-50%, 0px);
+        visibility: hidden;
+        transform: translate(-50%, 100vh);
       }
-      33.33% {
-        transform: translate(-50%, 0px);
+      33.33% { /* Đúng 1.5s đầu tiên: Bắt đầu xuất hiện từ mép dưới màn hình */
+        visibility: visible;
+        transform: translate(-50%, 100vh);
       }
-      /* Từ 33.33% đến 70% (từ 1.5s đến ~3.1s): Nhô lên từ từ hiện trọn 100% nguyên tên lửa */
-      70% {
-        transform: translate(-50%, -660px);
+      70% { /* Đúng 3.2s: Nhô lên lộ diện trọn vẹn 100% tên lửa */
+        visibility: visible;
+        transform: translate(-50%, -20px);
       }
-      /* Từ 70% đến 100%: Phóng bứt phá tốc độ biến mất hẳn lên bầu trời */
-      100% {
-        transform: translate(-50%, -250vh);
+      100% { /* Phóng bứt phá tốc độ biến mất hẳn lên bầu trời */
+        visibility: visible;
+        transform: translate(-50%, -220vh);
       }
     }
 
@@ -672,12 +674,12 @@
 
       const wrapper = document.getElementById("shipWrapper");
 
-      // Kích hoạt chuỗi chuyển động chuẩn khớp thời gian
+      // Kích hoạt chuỗi chuyển động chính xác theo thời gian
       setTimeout(() => {
         wrapper.classList.add("start-launch");
       }, 50);
 
-      // Hiển thị modal thành công sau khi tên lửa phóng vút lên hoàn tất
+      // Hiển thị modal thông báo kết quả sau khi tên lửa phóng đi
       setTimeout(() => {
         showSuccess();
       }, 4600);
