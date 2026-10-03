@@ -367,7 +367,7 @@
       box-shadow: 0 0 35px #22c55e;
     }
 
-    /* MÀN HÌNH MÔ PHỎNG BAY THẲNG */
+    /* MÀN HÌNH TÊN LỬA BAY THẲNG */
     .space-launch-stage {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -377,24 +377,6 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-    }
-
-    /* DÒNG CHỮ CÓ HIỆU ỨNG MỜ DẦN */
-    .launch-text {
-      font-size: 32px;
-      font-weight: 900;
-      color: #22c55e;
-      text-shadow: 0 0 25px #22c55e;
-      letter-spacing: 1px;
-      position: absolute;
-      top: 18%;
-      z-index: 510;
-      transition: opacity 1.8s ease-out; /* Thời gian mờ dần */
-      opacity: 1;
-    }
-
-    .launch-text.fade-out {
-      opacity: 0;
     }
 
     .ship-3d-wrapper {
@@ -447,7 +429,6 @@
       .options-grid { grid-template-columns: 1fr; }
       .welcome-title { font-size: 26px; }
       .ship-3d { width: 280px; }
-      .launch-text { font-size: 24px; }
     }
   </style>
 </head>
@@ -520,13 +501,10 @@
     </div>
   </div>
 
-  <!-- MÀN HÌNH TÊN LỬA VŨ TRỤ CÓ KIỂM TRA VA CHẠM THỜI GIAN THỰC -->
+  <!-- MÀN HÌNH TÊN LỬA VŨ TRỤ BAY THẲNG SLOW-MOTION -->
   <div class="space-launch-stage" id="launchStage">
-    <div class="launch-text" id="launchText">
-      ĐỘNG CƠ QUANG TỐC KÍCH HOẠT!
-    </div>
     <div class="ship-3d-wrapper" id="shipWrapper">
-      <svg class="ship-3d" id="shipSvg" viewBox="0 0 200 420" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="ship-3d" viewBox="0 0 200 420" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
         <path d="M70 310 C45 355, 35 390, 100 435 C165 390, 155 355, 130 310 Z" fill="#ffcb05" stroke="none"/>
         <path d="M85 310 C70 345, 65 375, 100 410 C135 375, 130 345, 115 310 Z" fill="#e84235" stroke="none"/>
 
@@ -670,37 +648,11 @@
       stage.style.display = "flex";
 
       const wrapper = document.getElementById("shipWrapper");
-      const shipSvg = document.getElementById("shipSvg");
-      const launchText = document.getElementById("launchText");
 
       // Khởi động chuyển động cho tên lửa
       setTimeout(() => {
         wrapper.classList.add("take-off");
       }, 300);
-
-      // VÒNG LẶP KIỂM TRA VA CHẠM THỜI GIAN THỰC (REAL-TIME COLLISION)
-      let textFaded = false;
-      function checkCollision() {
-        if (!textFaded) {
-          const textRect = launchText.getBoundingClientRect();
-          const shipRect = shipSvg.getBoundingClientRect();
-
-          // Khi đỉnh mũi tên lửa vừa vượt qua hoặc chạm vào viền dưới dòng chữ
-          if (shipRect.top <= textRect.bottom + 50) {
-            launchText.classList.add("fade-out"); // Bắt đầu mờ dần
-            textFaded = true;
-
-            // Sau 1.8s mờ xong thì ẩn hẳn 100%
-            setTimeout(() => {
-              launchText.style.display = "none";
-            }, 1800);
-          } else {
-            requestAnimationFrame(checkCollision);
-          }
-        }
-      }
-
-      requestAnimationFrame(checkCollision);
 
       // 10.2 giây sau hiện modal kết quả sứ mệnh thành công
       setTimeout(() => {
