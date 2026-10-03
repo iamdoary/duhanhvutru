@@ -367,7 +367,7 @@
       box-shadow: 0 0 35px #22c55e;
     }
 
-    /* MÀN HÌNH MÔ PHỎNG BAY THẲNG TỪ DƯỚI LÊN CHÍNH GIỮA */
+    /* MÀN HÌNH BAY THẲNG */
     .space-launch-stage {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -379,22 +379,39 @@
       flex-direction: column;
     }
 
-    /* CĂN CHÍNH GIỮA 100% TRỤC DỌC */
+    /* DÒNG CHỮ CÓ HIỆU ỨNG MỜ DẦN */
+    .launch-text {
+      font-size: 32px;
+      font-weight: 900;
+      color: #22c55e;
+      text-shadow: 0 0 25px #22c55e;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      position: absolute;
+      top: 15%;
+      z-index: 510;
+      transition: opacity 2.5s ease-out; /* Mờ dần mượt mà trong 2.5s */
+      opacity: 1;
+    }
+
+    .launch-text.fade-out {
+      opacity: 0;
+    }
+
     .ship-3d-wrapper {
       position: absolute;
       bottom: -700px;
       left: 50%;
-      transform: translateX(-50%); /* Căn chuẩn tâm ngang */
-      transition: transform 10s cubic-bezier(0.1, 0.5, 0.2, 1); /* Chạy siêu slow 10 giây */
+      transform: translateX(-50%);
+      transition: transform 10s cubic-bezier(0.1, 0.5, 0.2, 1);
     }
 
     .ship-3d {
-      width: 420px; /* Kích thước siêu to đập vào mắt */
+      width: 420px;
       filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.5));
     }
 
     .ship-3d-wrapper.take-off {
-      /* Phóng thẳng tắp từ dưới đáy lên đỉnh trời */
       transform: translate(-50%, -200vh);
     }
 
@@ -431,6 +448,7 @@
       .options-grid { grid-template-columns: 1fr; }
       .welcome-title { font-size: 26px; }
       .ship-3d { width: 280px; }
+      .launch-text { font-size: 24px; }
     }
   </style>
 </head>
@@ -503,35 +521,24 @@
     </div>
   </div>
 
-  <!-- MÀN HÌNH TÊN LỬA VŨ TRỤ SIÊU TO BAY THẲNG DỌC CHÍNH GIỮA MÀN HÌNH -->
+  <!-- MÀN HÌNH TÊN LỬA VŨ TRỤ CÓ CHỮ MỜ DẦN KHI ĐẦU TÀU CHẠM VÀO -->
   <div class="space-launch-stage" id="launchStage">
-    <div style="font-size:32px; font-weight:900; color:#22c55e; text-shadow:0 0 25px #22c55e; margin-bottom: 20px; letter-spacing: 1px;">
+    <div class="launch-text" id="launchText">
       ĐỘNG CƠ QUANG TỐC KÍCH HOẠT!
     </div>
     <div class="ship-3d-wrapper" id="shipWrapper">
-      <!-- Mẫu Tên Lửa Vector 3D Siêu To Hoàn Chỉnh -->
       <svg class="ship-3d" viewBox="0 0 200 420" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-        <!-- Đuôi lửa kép bùng cháy 3D -->
         <path d="M70 310 C45 355, 35 390, 100 435 C165 390, 155 355, 130 310 Z" fill="#ffcb05" stroke="none"/>
         <path d="M85 310 C70 345, 65 375, 100 410 C135 375, 130 345, 115 310 Z" fill="#e84235" stroke="none"/>
 
-        <!-- Cánh Trái (Đỏ Cực Nổi) -->
         <path d="M60 200 C20 215, 5 255, 12 305 C42 300, 62 265, 68 245 Z" fill="#e84235"/>
-        <!-- Cánh Phải (Đỏ Cực Nổi) -->
         <path d="M140 200 C180 215, 195 255, 188 305 C158 300, 138 265, 132 245 Z" fill="#e84235"/>
-        <!-- Vây Trung Tâm -->
         <path d="M100 210 C85 250, 82 290, 100 325 C118 290, 115 250, 100 210 Z" fill="#dc2626"/>
 
-        <!-- Thân Dưới (Xanh Neon Cyberpunk) -->
         <path d="M55 190 C50 240, 70 290, 100 300 C130 290, 150 240, 145 190 Z" fill="#00a3e0"/>
-
-        <!-- Thân Trên Vòm Cong (Màu Bơ Kem) -->
         <path d="M55 190 C55 110, 75 50, 100 15 C125 50, 145 110, 145 190 Z" fill="#fdf2d8"/>
-
-        <!-- Đầu Tên Lửa (Đỏ Bo Tròn) -->
         <path d="M68 75 C80 38, 90 22, 100 15 C110 22, 120 38, 132 75 Z" fill="#e84235"/>
 
-        <!-- Cửa Sổ Tròn 3D Gương Phản Quang -->
         <circle cx="100" cy="135" r="26" fill="#00a3e0"/>
         <circle cx="100" cy="135" r="19" fill="#0080b3"/>
         <line x1="90" y1="128" x2="110" y2="128" stroke="#0f172a" stroke-width="4"/>
@@ -664,11 +671,19 @@
       stage.style.display = "flex";
 
       const wrapper = document.getElementById("shipWrapper");
+      const launchText = document.getElementById("launchText");
+
+      // Bắt đầu cho tên lửa phóng lên
       setTimeout(() => {
         wrapper.classList.add("take-off");
       }, 300);
 
-      // Chờ 10.2 giây để chiêm ngưỡng trọn vẹn màn phóng tên lửa slow-motion
+      // Khi đầu tên lửa vừa chạm vào vùng chữ (khoảng 2.8s), kích hoạt chữ mờ dần rồi ẩn đi
+      setTimeout(() => {
+        launchText.classList.add("fade-out");
+      }, 2800);
+
+      // Chờ 10.2s để thưởng thức trọn vẹn màn phóng tên lửa slow-motion trước khi hiện modal kết quả
       setTimeout(() => {
         showSuccess();
       }, 10200);
