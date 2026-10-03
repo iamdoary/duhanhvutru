@@ -367,7 +367,7 @@
       box-shadow: 0 0 35px #22c55e;
     }
 
-    /* MÀN HÌNH TÊN LỬA BAY THẲNG TỪ DƯỚI LÊN (SLOW & SIÊU TO) */
+    /* MÀN HÌNH MÔ PHỎNG BAY THẲNG TỪ DƯỚI LÊN CHÍNH GIỮA */
     .space-launch-stage {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -379,22 +379,23 @@
       flex-direction: column;
     }
 
+    /* CĂN CHÍNH GIỮA 100% TRỤC DỌC */
     .ship-3d-wrapper {
       position: absolute;
-      bottom: -650px;
+      bottom: -700px;
       left: 50%;
-      transform: translateX(-50%); /* Đứng thẳng tắp giữa màn hình */
-      transition: transform 8s cubic-bezier(0.12, 0.6, 0.25, 1);
+      transform: translateX(-50%); /* Căn chuẩn tâm ngang */
+      transition: transform 10s cubic-bezier(0.1, 0.5, 0.2, 1); /* Chạy siêu slow 10 giây */
     }
 
     .ship-3d {
-      width: 380px; /* Tên lửa to đập vào mắt người nhìn */
-      filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.4));
+      width: 420px; /* Kích thước siêu to đập vào mắt */
+      filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.5));
     }
 
     .ship-3d-wrapper.take-off {
-      /* Phóng thẳng tắp từ dưới lên trời */
-      transform: translate(-50%, -180vh);
+      /* Phóng thẳng tắp từ dưới đáy lên đỉnh trời */
+      transform: translate(-50%, -200vh);
     }
 
     /* Modal Kết quả */
@@ -429,7 +430,7 @@
       .dashboard { grid-template-columns: 1fr; }
       .options-grid { grid-template-columns: 1fr; }
       .welcome-title { font-size: 26px; }
-      .ship-3d { width: 260px; }
+      .ship-3d { width: 280px; }
     }
   </style>
 </head>
@@ -502,41 +503,40 @@
     </div>
   </div>
 
-  <!-- MÀN HÌNH TÊN LỬA HOÀN CHỈNH BAY THẲNG TỪ DƯỚI LÊN -->
+  <!-- MÀN HÌNH TÊN LỬA VŨ TRỤ SIÊU TO BAY THẲNG DỌC CHÍNH GIỮA MÀN HÌNH -->
   <div class="space-launch-stage" id="launchStage">
     <div style="font-size:32px; font-weight:900; color:#22c55e; text-shadow:0 0 25px #22c55e; margin-bottom: 20px; letter-spacing: 1px;">
       ĐỘNG CƠ QUANG TỐC KÍCH HOẠT!
     </div>
     <div class="ship-3d-wrapper" id="shipWrapper">
-      <!-- Tên Lửa Vector Hoàn Chỉnh (Thẳng Đứng) -->
-      <svg class="ship-3d" viewBox="0 0 200 400" fill="none" stroke="#111827" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-        <!-- Luồng Lửa Đuôi Cực Lớn -->
-        <path d="M70 310 C50 350, 40 380, 100 420 C160 380, 150 350, 130 310 Z" fill="#ffcb05" stroke="none"/>
-        <path d="M85 310 C70 340, 65 365, 100 395 C135 365, 130 340, 115 310 Z" fill="#e84235" stroke="none"/>
+      <!-- Mẫu Tên Lửa Vector 3D Siêu To Hoàn Chỉnh -->
+      <svg class="ship-3d" viewBox="0 0 200 420" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Đuôi lửa kép bùng cháy 3D -->
+        <path d="M70 310 C45 355, 35 390, 100 435 C165 390, 155 355, 130 310 Z" fill="#ffcb05" stroke="none"/>
+        <path d="M85 310 C70 345, 65 375, 100 410 C135 375, 130 345, 115 310 Z" fill="#e84235" stroke="none"/>
 
-        <!-- Cánh Trái (Đỏ) -->
-        <path d="M60 210 C20 220, 5 260, 15 310 C45 305, 65 270, 70 250 Z" fill="#e84235"/>
-        <!-- Cánh Phải (Đỏ) -->
-        <path d="M140 210 C180 220, 195 260, 185 310 C155 305, 135 270, 130 250 Z" fill="#e84235"/>
-        <!-- Vây Giữa (Đỏ) -->
-        <path d="M100 220 C85 260, 80 300, 100 330 C120 300, 115 260, 100 220 Z" fill="#dc2626"/>
+        <!-- Cánh Trái (Đỏ Cực Nổi) -->
+        <path d="M60 200 C20 215, 5 255, 12 305 C42 300, 62 265, 68 245 Z" fill="#e84235"/>
+        <!-- Cánh Phải (Đỏ Cực Nổi) -->
+        <path d="M140 200 C180 215, 195 255, 188 305 C158 300, 138 265, 132 245 Z" fill="#e84235"/>
+        <!-- Vây Trung Tâm -->
+        <path d="M100 210 C85 250, 82 290, 100 325 C118 290, 115 250, 100 210 Z" fill="#dc2626"/>
 
-        <!-- Thân Dưới (Xanh Cực Nổi) -->
-        <path d="M55 200 C50 250, 70 300, 100 310 C130 300, 150 250, 145 200 Z" fill="#00a3e0"/>
+        <!-- Thân Dưới (Xanh Neon Cyberpunk) -->
+        <path d="M55 190 C50 240, 70 290, 100 300 C130 290, 150 240, 145 190 Z" fill="#00a3e0"/>
 
-        <!-- Thân Trên (Màu Kem Sáng) -->
-        <path d="M55 200 C55 120, 75 60, 100 20 C125 60, 145 120, 145 200 Z" fill="#fdf2d8"/>
+        <!-- Thân Trên Vòm Cong (Màu Bơ Kem) -->
+        <path d="M55 190 C55 110, 75 50, 100 15 C125 50, 145 110, 145 190 Z" fill="#fdf2d8"/>
 
-        <!-- Đầu Tên Lửa (Màu Đỏ Bo Cong Vòm) -->
-        <path d="M68 80 C80 40, 90 25, 100 20 C110 25, 120 40, 132 80 Z" fill="#e84235"/>
+        <!-- Đầu Tên Lửa (Đỏ Bo Tròn) -->
+        <path d="M68 75 C80 38, 90 22, 100 15 C110 22, 120 38, 132 75 Z" fill="#e84235"/>
 
-        <!-- Cửa Sổ Tròn 3D Soi Bóng -->
-        <circle cx="100" cy="140" r="26" fill="#00a3e0"/>
-        <circle cx="100" cy="140" r="19" fill="#0080b3"/>
-        <line x1="90" y1="133" x2="110" y2="133" stroke="#111827" stroke-width="4"/>
-        <line x1="90" y1="145" x2="110" y2="145" stroke="#111827" stroke-width="4"/>
-        <!-- Vệt phản quang cửa sổ -->
-        <path d="M88 128 A 18 18 0 0 1 112 128" fill="none" stroke="#ffffff" stroke-width="4" opacity="0.6"/>
+        <!-- Cửa Sổ Tròn 3D Gương Phản Quang -->
+        <circle cx="100" cy="135" r="26" fill="#00a3e0"/>
+        <circle cx="100" cy="135" r="19" fill="#0080b3"/>
+        <line x1="90" y1="128" x2="110" y2="128" stroke="#0f172a" stroke-width="4"/>
+        <line x1="90" y1="140" x2="110" y2="140" stroke="#0f172a" stroke-width="4"/>
+        <path d="M88 123 A 18 18 0 0 1 112 123" fill="none" stroke="#ffffff" stroke-width="4" opacity="0.7"/>
       </svg>
     </div>
   </div>
@@ -604,7 +604,6 @@
       const correctIdx = questions[currentIdx].answer;
       const allButtons = document.querySelectorAll(".option-btn");
 
-      // Khóa tất cả các nút
       allButtons.forEach(btn => btn.disabled = true);
 
       if (selectedIndex === correctIdx) {
@@ -669,10 +668,10 @@
         wrapper.classList.add("take-off");
       }, 300);
 
-      // Chờ 8.2 giây để thưởng thức trọn vẹn màn phóng tên lửa slow-motion
+      // Chờ 10.2 giây để chiêm ngưỡng trọn vẹn màn phóng tên lửa slow-motion
       setTimeout(() => {
         showSuccess();
-      }, 8200);
+      }, 10200);
     }
 
     function showSuccess() {
