@@ -377,12 +377,12 @@
       overflow: hidden;
     }
 
-    /* ĐẢM BẢO TÊN LỬA GIẤU KÍN 100% NGOÀI MÀN HÌNH TRƯỚC KHI BẮT ĐẦU */
+    /* GIẤU HOÀN TOÀN TÊN LỬA KHỎI ĐÁY MÀN HÌNH LÚC BAN ĐẦU */
     .ship-3d-wrapper {
       position: absolute;
-      top: 100vh; /* Nằm hoàn toàn bên dưới màn hình */
+      top: 100vh;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, 100%); /* Đẩy xuống thêm 100% chiều cao của chính nó để giấu tiệt */
       opacity: 0;
     }
 
@@ -391,24 +391,23 @@
       filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.5));
     }
 
-    /* KEYFRAME PHÓNG TÊN LỬA TỪ ĐÁY MÀN HÌNH VÚT LÊN CAO */
+    /* CHUYỂN ĐỘNG TRỪ TỪ, HÀI HOÀ CHUẨN XÁC TRONG 5 GIÂY */
     .ship-3d-wrapper.start-launch {
-      animation: rocketStraightUp 3.8s cubic-bezier(0.35, 0, 0.25, 1) forwards;
+      animation: rocketSmoothLaunch 5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
     }
 
-    @keyframes rocketStraightUp {
+    @keyframes rocketSmoothLaunch {
       0% {
-        top: 100vh; /* Xuất phát hoàn toàn từ mép dưới */
+        top: 100vh;
+        transform: translate(-50%, 100%);
         opacity: 0;
       }
-      5% {
-        opacity: 1; /* Hiện hình ngay khi vừa nhô lên */
-      }
-      50% {
-        top: 35vh; /* Nhô lên giữa màn hình lộ rõ toàn bộ thân tên lửa */
+      3% {
+        opacity: 1; /* Hiện hình từ từ ngay khi vừa ngoi khỏi đáy màn hình */
       }
       100% {
-        top: -120vh; /* Gia tốc phóng thẳng biến mất lên trên */
+        top: -100vh;
+        transform: translate(-50%, -100%); /* Lướt đều đặn vút hẳn khỏi màn hình ở trên */
         opacity: 1;
       }
     }
@@ -654,7 +653,7 @@
         launchBtn.onclick = launchSpaceship;
       } else {
         launchBtn.style.background = "#ef4444";
-        launchBtn.innerText = "⚠️ ĐỘNG CƠ BỊ KẸT (NHIÊN LIỆU < 80%)";
+        launchBtn.innerText = "⚠️️ ĐỘNG CƠ BỊ KẸT (NHIÊN LIỆU < 80%)";
         launchBtn.onclick = showFailure;
       }
     }
@@ -666,15 +665,15 @@
 
       const wrapper = document.getElementById("shipWrapper");
 
-      // Bắt đầu kích hoạt hiệu ứng phóng tên lửa
+      // Kích hoạt animation phóng tên lửa
       setTimeout(() => {
         wrapper.classList.add("start-launch");
       }, 100);
 
-      // Hiển thị modal thông báo sau khi phóng xong
+      // Hiển thị modal thông báo sau đúng 5.2s (đảm bảo tên lửa đã bay hoàn toàn khỏi màn hình)
       setTimeout(() => {
         showSuccess();
-      }, 4000);
+      }, 5200);
     }
 
     function showSuccess() {
