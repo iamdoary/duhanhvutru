@@ -374,19 +374,16 @@
       background: radial-gradient(circle at center, #0f172a 0%, #02040a 100%);
       z-index: 500;
       display: none;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+      overflow: hidden;
     }
 
-    /* TẠO KHU KHUÔN GIẤU TÊN LỬA BAN ĐẦU */
+    /* ĐẢM BẢO TÊN LỬA GIẤU KÍN 100% NGOÀI MÀN HÌNH TRƯỚC KHI BẮT ĐẦU */
     .ship-3d-wrapper {
       position: absolute;
-      bottom: 0;
+      top: 100vh; /* Nằm hoàn toàn bên dưới màn hình */
       left: 50%;
-      transform: translate(-50%, 100vh);
+      transform: translateX(-50%);
       opacity: 0;
-      visibility: hidden;
     }
 
     .ship-3d {
@@ -394,36 +391,25 @@
       filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.5));
     }
 
-    /* ANIMATION CHUẨN XÁC THEO YÊU CẦU:
-       - Total duration: 4.8s
-       - 0s -> 1.5s (31.25%): Giữ tàng hình bên dưới đáy
-       - 1.5s -> 3.2s (66.67%): Hiện hình và nhô dần lên lộ diện trọn vẹn thân tên lửa
-       - 3.2s -> 4.8s (100%): Gia tốc bức tốc bứt phá phóng vụt lên bầu trời
-    */
+    /* KEYFRAME PHÓNG TÊN LỬA TỪ ĐÁY MÀN HÌNH VÚT LÊN CAO */
     .ship-3d-wrapper.start-launch {
-      animation: rocketLaunchTimeline 4.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation: rocketStraightUp 3.8s cubic-bezier(0.35, 0, 0.25, 1) forwards;
     }
 
-    @keyframes rocketLaunchTimeline {
-      0%, 31.25% {
+    @keyframes rocketStraightUp {
+      0% {
+        top: 100vh; /* Xuất phát hoàn toàn từ mép dưới */
         opacity: 0;
-        visibility: hidden;
-        transform: translate(-50%, 100vh);
       }
-      32% {
-        opacity: 1;
-        visibility: visible;
-        transform: translate(-50%, 100vh);
+      5% {
+        opacity: 1; /* Hiện hình ngay khi vừa nhô lên */
       }
-      66.67% {
-        opacity: 1;
-        visibility: visible;
-        transform: translate(-50%, -20px); /* Lộ trọn vẹn thân tên lửa */
+      50% {
+        top: 35vh; /* Nhô lên giữa màn hình lộ rõ toàn bộ thân tên lửa */
       }
       100% {
+        top: -120vh; /* Gia tốc phóng thẳng biến mất lên trên */
         opacity: 1;
-        visibility: visible;
-        transform: translate(-50%, -250vh); /* Bứt tốc vút khỏi màn hình */
       }
     }
 
@@ -676,19 +662,19 @@
     function launchSpaceship() {
       document.getElementById("gameScreen").classList.remove("active");
       const stage = document.getElementById("launchStage");
-      stage.style.display = "flex";
+      stage.style.display = "block";
 
       const wrapper = document.getElementById("shipWrapper");
 
-      // Kích hoạt chuỗi chuyển động
+      // Bắt đầu kích hoạt hiệu ứng phóng tên lửa
       setTimeout(() => {
         wrapper.classList.add("start-launch");
-      }, 50);
+      }, 100);
 
-      // Hiển thị modal sau khi tên lửa bứt tốc hoàn tất (4.8s + 50ms)
+      // Hiển thị modal thông báo sau khi phóng xong
       setTimeout(() => {
         showSuccess();
-      }, 4900);
+      }, 4000);
     }
 
     function showSuccess() {
