@@ -379,14 +379,14 @@
       flex-direction: column;
     }
 
-    /* ẨN TÊN LỬA SÂU DƯỚI ĐÁY MÀN HÌNH */
+    /* ĐẶT TÊN LỬA SÂU BÊN DƯỚI VÀ TRỒI LÊN TRONG ~1S */
     .ship-3d-wrapper {
       position: absolute;
-      bottom: -1200px; /* Đặt siêu sâu để hoàn toàn không thấy tên lửa lúc đầu */
+      bottom: -1000px;
       left: 50%;
       transform: translateX(-50%);
-      /* Từ từ trồi lên lúc đầu (rất chậm) -> Rồi bứt phá gia tốc siêu nhanh */
-      transition: transform 7.5s cubic-bezier(0.42, 0, 0.88, 0.3);
+      /* Nhô lên cực nhanh tầm 1s rồi vút qua màn hình */
+      transition: transform 3.8s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
 
     .ship-3d {
@@ -395,7 +395,7 @@
     }
 
     .ship-3d-wrapper.take-off {
-      transform: translate(-50%, -280vh); /* Phóng vượt hẳn lên bầu trời */
+      transform: translate(-50%, -260vh);
     }
 
     /* Modal Kết quả */
@@ -503,7 +503,7 @@
     </div>
   </div>
 
-  <!-- MÀN HÌNH TÊN LỬA TỪ SÂU DƯỚI ĐÁY TỪ TỪ NHÔ LÊN RỒI BỨT PHÁ -->
+  <!-- MÀN HÌNH TÊN LỬA VŨ TRỤ TRỒI LÊN SAU 1S -->
   <div class="space-launch-stage" id="launchStage">
     <div class="ship-3d-wrapper" id="shipWrapper">
       <svg class="ship-3d" viewBox="0 0 200 420" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
@@ -651,15 +651,15 @@
 
       const wrapper = document.getElementById("shipWrapper");
 
-      // Bắt đầu cất cánh từ dưới sâu nhô lên
+      // Khởi động cất cánh ngay lập tức
       setTimeout(() => {
         wrapper.classList.add("take-off");
-      }, 300);
+      }, 100);
 
-      // Sau 7.8 giây hiện modal chúc mừng thành công
+      // 4.2 giây sau hiện modal thành công
       setTimeout(() => {
         showSuccess();
-      }, 7800);
+      }, 4200);
     }
 
     function showSuccess() {
