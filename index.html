@@ -379,13 +379,14 @@
       flex-direction: column;
     }
 
-    /* BAN ĐẦU DÙNG VISIBILITY HIDDEN VÀ TRANSLATEY(100VH) GIẤU HẲN 100% XUỐNG ĐÁY MÀN HÌNH */
+    /* TẠO KHU KHUÔN GIẤU TÊN LỬA BAN ĐẦU */
     .ship-3d-wrapper {
       position: absolute;
       bottom: 0;
       left: 50%;
       transform: translate(-50%, 100vh);
-      visibility: hidden; /* ĐẢM BẢO TÀNG HÌNH HOÀN TOÀN LÚC ĐẦU */
+      opacity: 0;
+      visibility: hidden;
     }
 
     .ship-3d {
@@ -393,31 +394,36 @@
       filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.5));
     }
 
-    /* ANIMATION CHUẨN XÁC:
-       0s -> 1.5s: Giữ tàng hình + ẩn dưới đáy
-       1.5s -> 3.2s: Hiện lên và từ từ ngoi lên trọn vẹn toàn bộ tên lửa
-       3.2s trở đi: Kích hoạt gia tốc tối đa phóng vút mất hút
+    /* ANIMATION CHUẨN XÁC THEO YÊU CẦU:
+       - Total duration: 4.8s
+       - 0s -> 1.5s (31.25%): Giữ tàng hình bên dưới đáy
+       - 1.5s -> 3.2s (66.67%): Hiện hình và nhô dần lên lộ diện trọn vẹn thân tên lửa
+       - 3.2s -> 4.8s (100%): Gia tốc bức tốc bứt phá phóng vụt lên bầu trời
     */
     .ship-3d-wrapper.start-launch {
-      animation: rocketExactSequence 4.5s ease-in-out forwards;
+      animation: rocketLaunchTimeline 4.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
 
-    @keyframes rocketExactSequence {
-      0% {
+    @keyframes rocketLaunchTimeline {
+      0%, 31.25% {
+        opacity: 0;
         visibility: hidden;
         transform: translate(-50%, 100vh);
       }
-      33.33% { /* Đúng 1.5s đầu tiên: Bắt đầu xuất hiện từ mép dưới màn hình */
+      32% {
+        opacity: 1;
         visibility: visible;
         transform: translate(-50%, 100vh);
       }
-      70% { /* Đúng 3.2s: Nhô lên lộ diện trọn vẹn 100% tên lửa */
+      66.67% {
+        opacity: 1;
         visibility: visible;
-        transform: translate(-50%, -20px);
+        transform: translate(-50%, -20px); /* Lộ trọn vẹn thân tên lửa */
       }
-      100% { /* Phóng bứt phá tốc độ biến mất hẳn lên bầu trời */
+      100% {
+        opacity: 1;
         visibility: visible;
-        transform: translate(-50%, -220vh);
+        transform: translate(-50%, -250vh); /* Bứt tốc vút khỏi màn hình */
       }
     }
 
@@ -674,15 +680,15 @@
 
       const wrapper = document.getElementById("shipWrapper");
 
-      // Kích hoạt chuỗi chuyển động chính xác theo thời gian
+      // Kích hoạt chuỗi chuyển động
       setTimeout(() => {
         wrapper.classList.add("start-launch");
       }, 50);
 
-      // Hiển thị modal thông báo kết quả sau khi tên lửa phóng đi
+      // Hiển thị modal sau khi tên lửa bứt tốc hoàn tất (4.8s + 50ms)
       setTimeout(() => {
         showSuccess();
-      }, 4600);
+      }, 4900);
     }
 
     function showSuccess() {
@@ -695,7 +701,7 @@
     function showFailure() {
       document.getElementById("modalTitle").innerText = "💥 SỰ CỐ KHỞI HÀNH!";
       document.getElementById("modalTitle").style.color = "#ef4444";
-      document.getElementById("modalDesc").innerText = `Nhiên liệu chỉ đạt ${fuelLevel}% (Cần ít nhất 80%). Do ảnh hưởng từ năng lượng độc hại, tàu không đủ công suất cất cánh!`;
+      document.getElementById("modalDesc").innerText = `Nhiên liệu chỉ đạt ${fuelLevel}% (Cần ít nhất 80%). Do thiếu năng lượng, tàu không đủ công suất cất cánh!`;
       document.getElementById("resultModal").style.display = "flex";
     }
   </script>
