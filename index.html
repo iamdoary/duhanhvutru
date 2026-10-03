@@ -273,17 +273,20 @@
       text-shadow: 0 0 10px #a855f7;
     }
 
-    /* CÂU HỎI & ĐÁP ÁN */
+    /* CÂU HỎI (ĐÃ CĂN GIỮA NỘI DUNG) */
     .question-box {
       background: rgba(30, 41, 59, 0.8);
       border: 1px solid #38bdf8;
       border-radius: 14px;
       padding: 20px;
-      min-height: 100px;
+      min-height: 120px;
       font-size: 17px;
       font-weight: 600;
       line-height: 1.5;
-      text-align: left;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
 
     .options-grid {
@@ -328,7 +331,7 @@
       box-shadow: 0 0 20px #ef4444 !important;
     }
 
-    /* Bảng điều hướng nút Câu tiếp theo */
+    /* Nút Câu tiếp theo */
     .next-panel {
       display: none;
       margin-top: 18px;
@@ -435,15 +438,6 @@
       max-width: 620px;
       margin-bottom: 25px;
       line-height: 1.6;
-    }
-
-    .shake { animation: shake 0.5s ease-in-out; }
-    @keyframes shake {
-      0%, 100% { transform: translate(0, 0); }
-      20% { transform: translate(-8px, 8px); }
-      40% { transform: translate(8px, -8px); }
-      60% { transform: translate(-8px, -8px); }
-      80% { transform: translate(8px, 8px); }
     }
 
     @media (max-width: 768px) {
@@ -627,8 +621,6 @@
         allButtons[correctIdx].classList.add("correct");
         streakCount = 0;
         fuelLevel = Math.max(0, fuelLevel - 10);
-        document.getElementById("gameScreen").classList.add("shake");
-        setTimeout(() => document.getElementById("gameScreen").classList.remove("shake"), 500);
       }
 
       updateUI();
