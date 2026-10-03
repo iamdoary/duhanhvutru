@@ -367,7 +367,7 @@
       box-shadow: 0 0 35px #22c55e;
     }
 
-    /* MÀN HÌNH MÔ PHỎNG BAY */
+    /* MÀN HÌNH TÊN LỬA VŨ TRỤ */
     .space-launch-stage {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -379,14 +379,14 @@
       flex-direction: column;
     }
 
-    /* ẨN TÊN LỬA HOÀN TOÀN BÊN DƯỚI KHUNG HÌNH BAN ĐẦU */
+    /* ẨN TÊN LỬA SÂU DƯỚI ĐÁY MÀN HÌNH */
     .ship-3d-wrapper {
       position: absolute;
-      bottom: -850px; /* Đặt thật sâu xuống dưới để lúc đầu không hề xuất hiện */
+      bottom: -1200px; /* Đặt siêu sâu để hoàn toàn không thấy tên lửa lúc đầu */
       left: 50%;
       transform: translateX(-50%);
-      /* Chậm lúc trồi lên -> Tăng tốc gia tốc cực nhanh */
-      transition: transform 6s cubic-bezier(0.5, 0.05, 0.85, 0.35);
+      /* Từ từ trồi lên lúc đầu (rất chậm) -> Rồi bứt phá gia tốc siêu nhanh */
+      transition: transform 7.5s cubic-bezier(0.42, 0, 0.88, 0.3);
     }
 
     .ship-3d {
@@ -395,7 +395,7 @@
     }
 
     .ship-3d-wrapper.take-off {
-      transform: translate(-50%, -250vh); /* Bay vụt qua hẳn mép trên màn hình */
+      transform: translate(-50%, -280vh); /* Phóng vượt hẳn lên bầu trời */
     }
 
     /* Modal Kết quả */
@@ -503,7 +503,7 @@
     </div>
   </div>
 
-  <!-- MÀN HÌNH TÊN LỬA TỪ TỪ XUẤT HIỆN TỪ ĐÁY VÀ PHÓNG BỨT PHÁ -->
+  <!-- MÀN HÌNH TÊN LỬA TỪ SÂU DƯỚI ĐÁY TỪ TỪ NHÔ LÊN RỒI BỨT PHÁ -->
   <div class="space-launch-stage" id="launchStage">
     <div class="ship-3d-wrapper" id="shipWrapper">
       <svg class="ship-3d" viewBox="0 0 200 420" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
@@ -651,15 +651,15 @@
 
       const wrapper = document.getElementById("shipWrapper");
 
-      // Khởi động tên lửa từ từ trồi lên từ dưới đáy
+      // Bắt đầu cất cánh từ dưới sâu nhô lên
       setTimeout(() => {
         wrapper.classList.add("take-off");
       }, 300);
 
-      // Chờ tên lửa gia tốc nhanh phóng khỏi màn hình rồi hiện bảng hoàn thành
+      // Sau 7.8 giây hiện modal chúc mừng thành công
       setTimeout(() => {
         showSuccess();
-      }, 6200);
+      }, 7800);
     }
 
     function showSuccess() {
