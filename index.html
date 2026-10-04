@@ -346,7 +346,7 @@
         <li><b>Trả lời ĐÚNG câu hỏi:</b> Bơm 8% nhiên liệu vào Lõi tím.</li>
         <li><b>Trả lời ĐÚNG 3 CÂU LIÊN TIẾP:</b> Từ câu trả lời đúng thứ 4 trở đi bơm 15% nhiên liệu vào bình.</li>
         <li><b>Trả lời SAI:</b> Bị trừ 10% mỗi câu (tô đỏ lựa chọn sai, không lộ đáp án đúng).</li>
-        <li><b>LÀM LẠI câu sai:</b> Làm lại đúng cộng +5% nhiên liệu (không tính Streak). Làm lại sai tiếp sẽ bị khóa nút Làm lại.</li>
+        <li><b>LÀM LẠI câu sai:</b> chỉ được làm lại 1 lần, nếu đúng được +5% nhiên liệu, nếu sai sẽ -12% nhiên liệu và không được làm lại câu đó nữa.</li>
       </ul>
       <i>Tàu sẽ cất cánh khi nhiên liệu đủ 80% trở lên, mong các phi hành gia trợ giúp!</i>
     </div>
@@ -494,7 +494,7 @@
           if (index === state.userChoice) {
             btn.classList.add(state.isCorrect ? "correct" : "wrong");
           }
-          // TUYỆT ĐỐI CHỈ TÔ XANH NẾU NGƯỜI DÙNG TRẢ LỜI ĐÚNG
+          // CHỈ TÔ XANH NẾU NGƯỜI DÙNG TRẢ LỜI ĐÚNG
           if (state.isCorrect && index === qData.answer) {
             btn.classList.add("correct");
           }
@@ -510,7 +510,7 @@
         if (!state.isCorrect) {
           const retryBtn = document.getElementById("retryBtn");
           retryBtn.style.display = "inline-block";
-          retryBtn.disabled = state.retryFailed;
+          retryBtn.disabled = state.retryFailed; // Khóa nếu đã thử lại và bị sai
         }
       }
     }
@@ -529,20 +529,24 @@
         state.isCorrect = true;
 
         if (state.retried) {
+          // Làm lại ĐÚNG -> Cộng 5% nhiên liệu
           fuelLevel = Math.min(100, fuelLevel + 5);
         } else {
+          // Trả lời lần đầu ĐÚNG
           streakCount++;
           const addFuel = (streakCount >= 4) ? 15 : 8;
           fuelLevel = Math.min(100, fuelLevel + addFuel);
         }
       } else {
-        // SAI -> CHỈ TÔ ĐỎ NÚT ĐÃ BẤM, KHÔNG TÔ XANH ĐÁP ÁN ĐÚNG!
         clickedBtn.classList.add("wrong");
         state.isCorrect = false;
 
         if (state.retried) {
+          // Làm lại SAI -> Trừ 12% nhiên liệu và khóa nút làm lại
           state.retryFailed = true;
+          fuelLevel = Math.max(0, fuelLevel - 12);
         } else {
+          // Lần 1 sai -> Trừ 10%
           streakCount = 0;
           fuelLevel = Math.max(0, fuelLevel - 10);
         }
