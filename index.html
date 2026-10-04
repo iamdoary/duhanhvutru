@@ -16,7 +16,6 @@
     html, body {
       width: 100%;
       min-height: 100vh;
-      /* Cho phép cuộn dọc mượt mà trên điện thoại, chỉ chặn cuộn ngang */
       overflow-x: hidden;
       overflow-y: auto;
     }
@@ -384,7 +383,6 @@
       overflow: hidden;
     }
 
-    /* GIẤU HOÀN TOÀN TÊN LỬA KHỎI ĐÁY MÀN HÌNH LÚC BAN ĐẦU */
     .ship-3d-wrapper {
       position: absolute;
       top: 100vh;
@@ -398,7 +396,6 @@
       filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.5));
     }
 
-    /* CHUYỂN ĐỘNG CHUẨN XÁC TRONG 5 GIÂY */
     .ship-3d-wrapper.start-launch {
       animation: rocketSmoothLaunch 5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
     }
@@ -447,7 +444,6 @@
       line-height: 1.6;
     }
 
-    /* TỐI ƯU GIAO DIỆN ĐIỆN THOẠI Mobile Responsive */
     @media (max-width: 768px) {
       body {
         padding: 12px 8px;
@@ -701,7 +697,7 @@
     function showSuccess() {
       document.getElementById("modalTitle").innerText = "🏆 SỨ MỆNH HOÀN THÀNH!";
       document.getElementById("modalTitle").style.color = "#22c55e";
-      document.getElementById("modalDesc").innerText = `Các Thuyền trưởng 12A10 đã nạp thành công ${fuelLevel}% nhiên liệu Lõi Tím! Phi thuyền đã cất cánh an toàn vào vũ trụ bao la.`;
+      document.getElementById("modalDesc").innerText = `CHÚC MỪNG CÁC PHI HÀNH GIA ĐÃ HOÀN THÀNH NHIỆM VỤ VÀ GIÚP CON TÀU RỜI KHỎI TRÁI ĐẤT THÀNH CÔNG. CHÚC CÁC PHI HÀNH GIA CÓ MỘT NGÀY LÀM VIỆC VÀ HỌC TẬP VUI VẺ! (Đã nạp thành công ${fuelLevel}% nhiên liệu Lõi Tím).`;
       document.getElementById("resultModal").style.display = "flex";
     }
 
