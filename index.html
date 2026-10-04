@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trạm Không Gian Vũ Trụ</title>
+  <title>Trạm Không Gian Vũ Trụ 12A10</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     * {
@@ -31,13 +31,9 @@
       padding: 20px 10px;
     }
 
-    /* Bầu trời sao động */
     .space-background {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       background: url('https://www.transparenttextures.com/patterns/stardust.png');
       opacity: 0.6;
       z-index: 1;
@@ -45,34 +41,23 @@
     }
 
     .planet-1 {
-      position: fixed;
-      top: 10%;
-      left: 5%;
-      width: 120px;
-      height: 120px;
+      position: fixed; top: 10%; left: 5%;
+      width: 120px; height: 120px;
       background: radial-gradient(circle at 30% 30%, #a855f7, #3b0764);
       border-radius: 50%;
       box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
-      z-index: 2;
-      opacity: 0.8;
-      pointer-events: none;
+      z-index: 2; opacity: 0.8; pointer-events: none;
     }
 
     .planet-2 {
-      position: fixed;
-      bottom: 15%;
-      right: 8%;
-      width: 80px;
-      height: 80px;
+      position: fixed; bottom: 15%; right: 8%;
+      width: 80px; height: 80px;
       background: radial-gradient(circle at 30% 30%, #38bdf8, #0369a1);
       border-radius: 50%;
       box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
-      z-index: 2;
-      opacity: 0.7;
-      pointer-events: none;
+      z-index: 2; opacity: 0.7; pointer-events: none;
     }
 
-    /* MÀN HÌNH CHUNG */
     .screen {
       position: relative;
       z-index: 10;
@@ -90,37 +75,27 @@
       margin: auto;
     }
 
-    .screen.active {
-      display: block;
-    }
+    .screen.active { display: block; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.96); }
       to { opacity: 1; transform: scale(1); }
     }
 
-    /* MÀN HÌNH 1: WELCOME */
     .welcome-title {
-      font-size: 32px;
-      font-weight: 900;
+      font-size: 32px; font-weight: 900;
       color: #38bdf8;
       text-shadow: 0 0 20px #38bdf8, 0 0 40px #a855f7;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
+      letter-spacing: 1px; margin-bottom: 20px;
     }
 
     .glow-btn {
-      font-size: 18px;
-      font-weight: 700;
-      padding: 14px 36px;
-      color: #02040a;
-      background: #38bdf8;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
+      font-size: 18px; font-weight: 700;
+      padding: 14px 36px; color: #02040a;
+      background: #38bdf8; border: none;
+      border-radius: 50px; cursor: pointer;
       box-shadow: 0 0 25px #38bdf8;
-      transition: all 0.3s ease;
-      margin-top: 15px;
+      transition: all 0.3s ease; margin-top: 15px;
     }
 
     .glow-btn:hover {
@@ -129,42 +104,24 @@
       background: #7dd3fc;
     }
 
-    /* MÀN HÌNH 2: STORY */
     .alert-title {
-      font-size: 28px;
-      font-weight: 900;
-      color: #ef4444;
-      text-shadow: 0 0 20px #ef4444;
-      margin-bottom: 16px;
-      letter-spacing: 1px;
+      font-size: 28px; font-weight: 900;
+      color: #ef4444; text-shadow: 0 0 20px #ef4444;
+      margin-bottom: 16px; letter-spacing: 1px;
     }
 
     .story-body {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #e2e8f0;
-      text-align: left;
+      font-size: 15px; line-height: 1.6;
+      color: #e2e8f0; text-align: left;
       background: rgba(30, 41, 59, 0.6);
-      padding: 18px 16px;
-      border-radius: 12px;
-      border-left: 4px solid #ef4444;
-      margin-bottom: 20px;
+      padding: 18px 16px; border-radius: 12px;
+      border-left: 4px solid #ef4444; margin-bottom: 20px;
     }
 
-    .story-body ul {
-      margin-left: 18px;
-      margin-top: 8px;
-      margin-bottom: 10px;
-    }
+    .story-body ul { margin-left: 18px; margin-top: 8px; margin-bottom: 10px; }
+    .story-body li { margin-bottom: 4px; }
 
-    .story-body li {
-      margin-bottom: 4px;
-    }
-
-    /* MÀN HÌNH 3: GAMEPLAY */
-    .game-container {
-      max-width: 1050px;
-    }
+    .game-container { max-width: 1050px; }
 
     .header {
       margin-bottom: 18px;
@@ -173,75 +130,50 @@
     }
 
     .main-game-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: #38bdf8;
-      text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+      font-size: 18px; font-weight: 800;
+      color: #38bdf8; text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
       letter-spacing: 0.5px;
     }
 
     .status-bar {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-      font-weight: 700;
-      margin-top: 10px;
+      display: flex; justify-content: space-between;
+      font-size: 14px; font-weight: 700; margin-top: 10px;
     }
 
     .dashboard {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 20px;
-      align-items: center;
+      display: grid; grid-template-columns: 220px 1fr;
+      gap: 20px; align-items: center;
     }
 
-    /* LÕI TÍM 3D */
     .fuel-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: rgba(30, 41, 59, 0.5);
-      padding: 16px 10px;
-      border-radius: 20px;
-      border: 1px solid rgba(168, 85, 247, 0.3);
+      display: flex; flex-direction: column; align-items: center;
+      background: rgba(30, 41, 59, 0.5); padding: 16px 10px;
+      border-radius: 20px; border: 1px solid rgba(168, 85, 247, 0.3);
       box-shadow: inset 0 0 15px rgba(168, 85, 247, 0.2);
     }
 
     .fuel-title {
-      font-size: 15px;
-      font-weight: 800;
-      color: #c084fc;
-      margin-bottom: 12px;
-      letter-spacing: 0.5px;
+      font-size: 15px; font-weight: 800;
+      color: #c084fc; margin-bottom: 12px; letter-spacing: 0.5px;
     }
 
-    /* Khối trụ 3D */
     .cylinder-3d-container {
-      position: relative;
-      width: 70px;
-      height: 180px;
-      display: flex;
-      justify-content: center;
+      position: relative; width: 70px; height: 180px;
+      display: flex; justify-content: center;
     }
 
     .cylinder-cap-top, .cylinder-cap-bottom {
-      position: absolute;
-      width: 100%;
-      height: 18px;
+      position: absolute; width: 100%; height: 18px;
       background: linear-gradient(90deg, #475569 0%, #cbd5e1 50%, #334155 100%);
-      border-radius: 50%;
-      z-index: 10;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      border: 1px solid #94a3b8;
+      border-radius: 50%; z-index: 10;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5); border: 1px solid #94a3b8;
     }
 
     .cylinder-cap-top { top: -9px; }
     .cylinder-cap-bottom { bottom: -9px; }
 
     .cylinder-body {
-      position: relative;
-      width: 100%;
-      height: 100%;
+      position: relative; width: 100%; height: 100%;
       background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.02) 25%, rgba(0,0,0,0.3) 75%, rgba(255,255,255,0.15) 100%);
       border-left: 2px solid rgba(192, 132, 252, 0.8);
       border-right: 2px solid rgba(192, 132, 252, 0.8);
@@ -250,150 +182,112 @@
     }
 
     .cylinder-fill {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 0%;
+      position: absolute; bottom: 0; width: 100%; height: 0%;
       background: linear-gradient(90deg, #6b21a8 0%, #a855f7 40%, #d8b4fe 70%, #7e22ce 100%);
       transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 0 25px #a855f7;
     }
 
     .cylinder-fill::before {
-      content: '';
-      position: absolute;
-      top: -8px;
-      left: 0;
-      width: 100%;
-      height: 16px;
+      content: ''; position: absolute; top: -8px; left: 0;
+      width: 100%; height: 16px;
       background: radial-gradient(ellipse at center, #f0abfc 0%, #a855f7 80%);
-      border-radius: 50%;
-      box-shadow: 0 0 10px #f0abfc;
+      border-radius: 50%; box-shadow: 0 0 10px #f0abfc;
     }
 
     .fuel-percent {
-      font-size: 20px;
-      font-weight: 900;
-      color: #c084fc;
-      margin-top: 12px;
-      text-shadow: 0 0 10px #a855f7;
+      font-size: 20px; font-weight: 900;
+      color: #c084fc; margin-top: 12px; text-shadow: 0 0 10px #a855f7;
     }
 
-    /* CÂU HỎI */
     .question-box {
       background: rgba(30, 41, 59, 0.8);
-      border: 1px solid #38bdf8;
-      border-radius: 14px;
-      padding: 16px;
-      min-height: 100px;
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 1.5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+      border: 1px solid #38bdf8; border-radius: 14px;
+      padding: 16px; min-height: 100px;
+      font-size: 16px; font-weight: 600; line-height: 1.5;
+      display: flex; justify-content: center; align-items: center; text-align: center;
     }
 
     .options-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 14px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin-top: 14px;
     }
 
     .option-btn {
       background: rgba(15, 23, 42, 0.85);
       border: 1px solid rgba(56, 189, 248, 0.4);
-      color: #f1f5f9;
-      padding: 12px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.2s ease;
+      color: #f1f5f9; padding: 12px;
+      border-radius: 10px; font-size: 14px; font-weight: 500;
+      cursor: pointer; text-align: left; transition: all 0.2s ease;
     }
 
     .option-btn:hover:not(:disabled) {
       background: rgba(56, 189, 248, 0.25);
-      border-color: #38bdf8;
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+      border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
     }
 
     .option-btn.correct {
-      background: #16a34a !important;
-      border-color: #22c55e !important;
-      color: #ffffff !important;
-      box-shadow: 0 0 20px #22c55e !important;
+      background: #16a34a !important; border-color: #22c55e !important;
+      color: #ffffff !important; box-shadow: 0 0 20px #22c55e !important;
     }
 
     .option-btn.wrong {
-      background: #dc2626 !important;
-      border-color: #ef4444 !important;
-      color: #ffffff !important;
-      box-shadow: 0 0 20px #ef4444 !important;
+      background: #dc2626 !important; border-color: #ef4444 !important;
+      color: #ffffff !important; box-shadow: 0 0 20px #ef4444 !important;
     }
 
-    .next-panel {
-      display: none;
-      margin-top: 16px;
-      text-align: right;
+    .action-panel {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 16px; gap: 10px; flex-wrap: wrap;
     }
 
-    .next-btn {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      padding: 10px 24px;
-      background: #38bdf8;
-      color: #02040a;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 0 15px #38bdf8;
+    .nav-btn {
+      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700;
+      padding: 10px 20px; border: none; border-radius: 30px; cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    .launch-panel {
-      display: none;
-      margin-top: 20px;
+    .back-btn {
+      background: rgba(148, 163, 184, 0.2); color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.4);
     }
+    .back-btn:hover:not(:disabled) { background: rgba(148, 163, 184, 0.4); color: #fff; }
+    .back-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    .retry-btn {
+      background: #f59e0b; color: #02040a;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+    }
+    .retry-btn:hover:not(:disabled) { background: #fbbf24; transform: scale(1.05); }
+    .retry-btn:disabled { opacity: 0.4; cursor: not-allowed; filter: grayscale(1); }
+
+    .next-btn {
+      background: #38bdf8; color: #02040a;
+      box-shadow: 0 0 15px #38bdf8;
+    }
+    .next-btn:hover { background: #7dd3fc; transform: scale(1.05); }
+
+    .launch-panel { display: none; margin-top: 20px; }
 
     .launch-btn-big {
-      font-size: 18px;
-      font-weight: 900;
-      padding: 16px 36px;
-      background: #22c55e;
-      color: #02040a;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 0 35px #22c55e;
-      width: 100%;
+      font-size: 18px; font-weight: 900; padding: 16px 36px;
+      background: #22c55e; color: #02040a; border: none;
+      border-radius: 50px; cursor: pointer; box-shadow: 0 0 35px #22c55e; width: 100%;
     }
 
-    /* MÀN HÌNH TÊN LỬA VŨ TRỤ */
     .space-launch-stage {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background: radial-gradient(circle at center, #0f172a 0%, #02040a 100%);
-      z-index: 500;
-      display: none;
-      overflow: hidden;
+      z-index: 500; display: none; overflow: hidden;
     }
 
     .ship-3d-wrapper {
-      position: absolute;
-      top: 100vh;
-      left: 50%;
-      transform: translate(-50%, 100%);
-      opacity: 0;
+      position: absolute; top: 100vh; left: 50%;
+      transform: translate(-50%, 100%); opacity: 0;
     }
 
     .ship-3d {
-      width: 320px;
-      filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.5));
+      width: 320px; filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.5));
     }
 
     .ship-3d-wrapper.start-launch {
@@ -401,68 +295,32 @@
     }
 
     @keyframes rocketSmoothLaunch {
-      0% {
-        top: 100vh;
-        transform: translate(-50%, 100%);
-        opacity: 0;
-      }
-      3% {
-        opacity: 1;
-      }
-      100% {
-        top: -100vh;
-        transform: translate(-50%, -100%);
-        opacity: 1;
-      }
+      0% { top: 100vh; transform: translate(-50%, 100%); opacity: 0; }
+      3% { opacity: 1; }
+      100% { top: -100vh; transform: translate(-50%, -100%); opacity: 1; }
     }
 
-    /* Modal Kết quả */
     .result-modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(2, 4, 10, 0.95);
-      z-index: 600;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 20px;
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(2, 4, 10, 0.95); z-index: 600;
+      justify-content: center; align-items: center; flex-direction: column;
+      text-align: center; padding: 20px;
     }
 
-    .modal-title {
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
+    .modal-title { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
     .modal-desc {
-      font-size: 15px;
-      color: #94a3b8;
-      max-width: 620px;
-      margin-bottom: 25px;
-      line-height: 1.6;
+      font-size: 15px; color: #94a3b8; max-width: 620px;
+      margin-bottom: 25px; line-height: 1.6;
     }
 
     @media (max-width: 768px) {
-      body {
-        padding: 12px 8px;
-      }
-      .dashboard { 
-        grid-template-columns: 1fr; 
-      }
-      .options-grid { 
-        grid-template-columns: 1fr; 
-      }
-      .welcome-title { 
-        font-size: 24px; 
-      }
-      .ship-3d { 
-        width: 240px; 
-      }
-      .cylinder-3d-container {
-        height: 150px;
-      }
+      body { padding: 12px 8px; }
+      .dashboard { grid-template-columns: 1fr; }
+      .options-grid { grid-template-columns: 1fr; }
+      .welcome-title { font-size: 24px; }
+      .ship-3d { width: 240px; }
+      .cylinder-3d-container { height: 150px; }
+      .action-panel { justify-content: center; }
     }
   </style>
 </head>
@@ -488,6 +346,7 @@
         <li><b>Trả lời ĐÚNG câu hỏi:</b> Bơm 8% nhiên liệu vào Lõi tím.</li>
         <li><b>Trả lời ĐÚNG 3 CÂU LIÊN TIẾP:</b> Từ câu trả lời đúng thứ 4 trở đi bơm 15% nhiên liệu vào bình.</li>
         <li><b>Trả lời SAI:</b> Bị trừ 10% mỗi câu.</li>
+        <li><b>LÀM LẠI câu sai:</b> Nếu làm lại đúng sẽ được cộng 5% (không tính vào chuỗi Streak). Làm lại sai tiếp sẽ bị khóa nút Làm lại.</li>
       </ul>
       <i>Tàu sẽ cất cánh khi nhiên liệu đủ 80% trở lên, mong các phi hành gia trợ giúp!</i>
     </div>
@@ -523,9 +382,11 @@
         <div class="question-box" id="questionBox">Đang tải câu hỏi...</div>
         <div class="options-grid" id="optionsBox"></div>
 
-        <!-- Nút Câu tiếp theo -->
-        <div class="next-panel" id="nextPanel">
-          <button class="next-btn" onclick="nextQuestion()">CÂU TIẾP THEO ➔</button>
+        <!-- Bảng điều khiển nút bấm linh hoạt -->
+        <div class="action-panel" id="actionPanel">
+          <button class="nav-btn back-btn" id="backBtn" onclick="prevQuestion()">⇦ QUAY LẠI</button>
+          <button class="nav-btn retry-btn" id="retryBtn" style="display:none;" onclick="retryQuestion()">🔄 LÀM LẠI</button>
+          <button class="nav-btn next-btn" id="nextBtn" style="display:none;" onclick="nextQuestion()">CÂU TIẾP THEO ➔</button>
         </div>
 
         <div class="launch-panel" id="launchPanel">
@@ -541,15 +402,12 @@
       <svg class="ship-3d" viewBox="0 0 200 420" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
         <path d="M70 310 C45 355, 35 390, 100 435 C165 390, 155 355, 130 310 Z" fill="#ffcb05" stroke="none"/>
         <path d="M85 310 C70 345, 65 375, 100 410 C135 375, 130 345, 115 310 Z" fill="#e84235" stroke="none"/>
-
         <path d="M60 200 C20 215, 5 255, 12 305 C42 300, 62 265, 68 245 Z" fill="#e84235"/>
         <path d="M140 200 C180 215, 195 255, 188 305 C158 300, 138 265, 132 245 Z" fill="#e84235"/>
         <path d="M100 210 C85 250, 82 290, 100 325 C118 290, 115 250, 100 210 Z" fill="#dc2626"/>
-
         <path d="M55 190 C50 240, 70 290, 100 300 C130 290, 150 240, 145 190 Z" fill="#00a3e0"/>
         <path d="M55 190 C55 110, 75 50, 100 15 C125 50, 145 110, 145 190 Z" fill="#fdf2d8"/>
         <path d="M68 75 C80 38, 90 22, 100 15 C110 22, 120 38, 132 75 Z" fill="#e84235"/>
-
         <circle cx="100" cy="135" r="26" fill="#00a3e0"/>
         <circle cx="100" cy="135" r="19" fill="#0080b3"/>
         <line x1="90" y1="128" x2="110" y2="128" stroke="#0f172a" stroke-width="4"/>
@@ -584,6 +442,15 @@
     let fuelLevel = 0;
     let streakCount = 0;
 
+    // Mảng lưu trạng thái câu trả lời của từng câu
+    // { userChoice: null, isCorrect: false, retried: false, retryFailed: false }
+    let userAnswers = Array(questions.length).fill(null).map(() => ({
+      userChoice: null,
+      isCorrect: false,
+      retried: false,
+      retryFailed: false
+    }));
+
     function goToStory() {
       document.getElementById("welcomeScreen").classList.remove("active");
       document.getElementById("storyScreen").classList.add("active");
@@ -603,7 +470,6 @@
         return;
       }
 
-      document.getElementById("nextPanel").style.display = "none";
       document.getElementById("currentQ").innerText = currentIdx + 1;
       const qData = questions[currentIdx];
       document.getElementById("questionBox").innerText = qData.q;
@@ -611,35 +477,108 @@
       const optionsBox = document.getElementById("optionsBox");
       optionsBox.innerHTML = "";
 
+      const state = userAnswers[currentIdx];
+
+      // Điều khiển nút QUAY LẠI
+      const backBtn = document.getElementById("backBtn");
+      backBtn.disabled = (currentIdx === 0);
+
+      // Reset ẩn các nút hành động
+      document.getElementById("nextBtn").style.display = "none";
+      document.getElementById("retryBtn").style.display = "none";
+
       qData.options.forEach((opt, index) => {
         const btn = document.createElement("button");
         btn.className = "option-btn";
         btn.innerText = opt;
-        btn.onclick = () => handleAnswer(index, btn);
+        
+        // Nếu đã từng trả lời câu này
+        if (state.userChoice !== null) {
+          btn.disabled = true;
+          if (index === state.userChoice) {
+            btn.classList.add(state.isCorrect ? "correct" : "wrong");
+          }
+          if (!state.isCorrect && index === qData.answer) {
+            btn.classList.add("correct");
+          }
+        } else {
+          btn.onclick = () => handleAnswer(index, btn);
+        }
+
         optionsBox.appendChild(btn);
       });
+
+      // Nếu đã làm câu này rồi thì hiển thị các nút điều hướng tương ứng
+      if (state.userChoice !== null) {
+        document.getElementById("nextBtn").style.display = "inline-block";
+        if (!state.isCorrect) {
+          const retryBtn = document.getElementById("retryBtn");
+          retryBtn.style.display = "inline-block";
+          retryBtn.disabled = state.retryFailed; // Khóa nếu đã thử lại và sai tiếp
+        }
+      }
     }
 
     function handleAnswer(selectedIndex, clickedBtn) {
       const correctIdx = questions[currentIdx].answer;
       const allButtons = document.querySelectorAll(".option-btn");
+      const state = userAnswers[currentIdx];
 
       allButtons.forEach(btn => btn.disabled = true);
 
+      // Đánh dấu lựa chọn
+      state.userChoice = selectedIndex;
+
       if (selectedIndex === correctIdx) {
         clickedBtn.classList.add("correct");
-        streakCount++;
-        const addFuel = (streakCount >= 4) ? 15 : 8;
-        fuelLevel = Math.min(100, fuelLevel + addFuel);
+        state.isCorrect = true;
+
+        if (state.retried) {
+          // Trả lời lại đúng -> Cộng 5% nhiên liệu, không tính chuỗi
+          fuelLevel = Math.min(100, fuelLevel + 5);
+        } else {
+          // Trả lời đúng ngay lần đầu
+          streakCount++;
+          const addFuel = (streakCount >= 4) ? 15 : 8;
+          fuelLevel = Math.min(100, fuelLevel + addFuel);
+        }
       } else {
         clickedBtn.classList.add("wrong");
         allButtons[correctIdx].classList.add("correct");
-        streakCount = 0;
-        fuelLevel = Math.max(0, fuelLevel - 10);
+        state.isCorrect = false;
+
+        if (state.retried) {
+          // Làm lại mà vẫn sai -> Khóa luôn nút Làm lại
+          state.retryFailed = true;
+        } else {
+          // Sai lần đầu
+          streakCount = 0;
+          fuelLevel = Math.max(0, fuelLevel - 10);
+        }
       }
 
       updateUI();
-      document.getElementById("nextPanel").style.display = "block";
+
+      document.getElementById("nextBtn").style.display = "inline-block";
+      if (!state.isCorrect) {
+        const retryBtn = document.getElementById("retryBtn");
+        retryBtn.style.display = "inline-block";
+        retryBtn.disabled = state.retryFailed;
+      }
+    }
+
+    function retryQuestion() {
+      const state = userAnswers[currentIdx];
+      state.userChoice = null;
+      state.retried = true; // Đánh dấu là đang làm lại
+      loadQuestion();
+    }
+
+    function prevQuestion() {
+      if (currentIdx > 0) {
+        currentIdx--;
+        loadQuestion();
+      }
     }
 
     function nextQuestion() {
@@ -664,7 +603,7 @@
     function finishQuiz() {
       document.getElementById("questionBox").innerText = "Đã hoàn thành toàn bộ câu hỏi kiểm tra năng lượng!";
       document.getElementById("optionsBox").innerHTML = "";
-      document.getElementById("nextPanel").style.display = "none";
+      document.getElementById("actionPanel").style.display = "none";
       document.getElementById("launchPanel").style.display = "block";
 
       const launchBtn = document.getElementById("launchBtn");
