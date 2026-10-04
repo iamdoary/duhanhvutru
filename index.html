@@ -345,7 +345,7 @@
       <ul>
         <li><b>Trả lời ĐÚNG câu hỏi:</b> Bơm 8% nhiên liệu vào Lõi tím.</li>
         <li><b>Trả lời ĐÚNG 3 CÂU LIÊN TIẾP:</b> Từ câu trả lời đúng thứ 4 trở đi bơm 15% nhiên liệu vào bình.</li>
-        <li><b>Trả lời SAI:</b> Bị trừ 10% mỗi câu.</li>
+        <li><b>Trả lời SAI:</b> Bị trừ 10% mỗi câu (không hiển thị đáp án đúng để bạn suy nghĩ làm lại).</li>
         <li><b>LÀM LẠI câu sai:</b> Nếu làm lại đúng sẽ được cộng 5% (không tính vào chuỗi Streak). Làm lại sai tiếp sẽ bị khóa nút Làm lại.</li>
       </ul>
       <i>Tàu sẽ cất cánh khi nhiên liệu đủ 80% trở lên, mong các phi hành gia trợ giúp!</i>
@@ -382,7 +382,6 @@
         <div class="question-box" id="questionBox">Đang tải câu hỏi...</div>
         <div class="options-grid" id="optionsBox"></div>
 
-        <!-- Bảng điều khiển nút bấm linh hoạt -->
         <div class="action-panel" id="actionPanel">
           <button class="nav-btn back-btn" id="backBtn" onclick="prevQuestion()">⇦ QUAY LẠI</button>
           <button class="nav-btn retry-btn" id="retryBtn" style="display:none;" onclick="retryQuestion()">🔄 LÀM LẠI</button>
@@ -442,8 +441,6 @@
     let fuelLevel = 0;
     let streakCount = 0;
 
-    // Mảng lưu trạng thái câu trả lời của từng câu
-    // { userChoice: null, isCorrect: false, retried: false, retryFailed: false }
     let userAnswers = Array(questions.length).fill(null).map(() => ({
       userChoice: null,
       isCorrect: false,
@@ -479,11 +476,9 @@
 
       const state = userAnswers[currentIdx];
 
-      // Điều khiển nút QUAY LẠI
       const backBtn = document.getElementById("backBtn");
       backBtn.disabled = (currentIdx === 0);
 
-      // Reset ẩn các nút hành động
       document.getElementById("nextBtn").style.display = "none";
       document.getElementById("retryBtn").style.display = "none";
 
@@ -498,7 +493,9 @@
           if (index === state.userChoice) {
             btn.classList.add(state.isCorrect ? "correct" : "wrong");
           }
-          if (!state.isCorrect && index === qData.answer) {
+          
+          // Chỉ tô xanh đáp án đúng nếu trả lời ĐÚNG, hoặc nếu đã thử lại lần 2 mà vẫn SAI
+          if ((state.isCorrect || state.retryFailed) && index === qData.answer) {
             btn.classList.add("correct");
           }
         } else {
@@ -508,13 +505,12 @@
         optionsBox.appendChild(btn);
       });
 
-      // Nếu đã làm câu này rồi thì hiển thị các nút điều hướng tương ứng
       if (state.userChoice !== null) {
         document.getElementById("nextBtn").style.display = "inline-block";
         if (!state.isCorrect) {
           const retryBtn = document.getElementById("retryBtn");
           retryBtn.style.display = "inline-block";
-          retryBtn.disabled = state.retryFailed; // Khóa nếu đã thử lại và sai tiếp
+          retryBtn.disabled = state.retryFailed;
         }
       }
     }
@@ -526,7 +522,6 @@
 
       allButtons.forEach(btn => btn.disabled = true);
 
-      // Đánh dấu lựa chọn
       state.userChoice = selectedIndex;
 
       if (selectedIndex === correctIdx) {
@@ -534,24 +529,22 @@
         state.isCorrect = true;
 
         if (state.retried) {
-          // Trả lời lại đúng -> Cộng 5% nhiên liệu, không tính chuỗi
           fuelLevel = Math.min(100, fuelLevel + 5);
         } else {
-          // Trả lời đúng ngay lần đầu
           streakCount++;
           const addFuel = (streakCount >= 4) ? 15 : 8;
           fuelLevel = Math.min(100, fuelLevel + addFuel);
         }
       } else {
         clickedBtn.classList.add("wrong");
-        allButtons[correctIdx].classList.add("correct");
         state.isCorrect = false;
 
         if (state.retried) {
-          // Làm lại mà vẫn sai -> Khóa luôn nút Làm lại
+          // Làm lại lần 2 mà vẫn sai -> Hiện đáp án đúng để học hỏi và khóa nút Làm lại
+          allButtons[correctIdx].classList.add("correct");
           state.retryFailed = true;
         } else {
-          // Sai lần đầu
+          // Lần 1 sai -> KHÔNG HIỆN ĐÁP ÁN ĐÚNG
           streakCount = 0;
           fuelLevel = Math.max(0, fuelLevel - 10);
         }
@@ -570,7 +563,7 @@
     function retryQuestion() {
       const state = userAnswers[currentIdx];
       state.userChoice = null;
-      state.retried = true; // Đánh dấu là đang làm lại
+      state.retried = true;
       loadQuestion();
     }
 
