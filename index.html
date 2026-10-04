@@ -345,8 +345,8 @@
       <ul>
         <li><b>Trả lời ĐÚNG câu hỏi:</b> Bơm 8% nhiên liệu vào Lõi tím.</li>
         <li><b>Trả lời ĐÚNG 3 CÂU LIÊN TIẾP:</b> Từ câu trả lời đúng thứ 4 trở đi bơm 15% nhiên liệu vào bình.</li>
-        <li><b>Trả lời SAI:</b> Bị trừ 10% mỗi câu (không hiển thị đáp án đúng để bạn suy nghĩ làm lại).</li>
-        <li><b>LÀM LẠI câu sai:</b> Nếu làm lại đúng sẽ được cộng 5% (không tính vào chuỗi Streak). Làm lại sai tiếp sẽ bị khóa nút Làm lại.</li>
+        <li><b>Trả lời SAI:</b> Bị trừ 10% mỗi câu (tô đỏ lựa chọn sai, không lộ đáp án đúng).</li>
+        <li><b>LÀM LẠI câu sai:</b> Làm lại đúng cộng +5% nhiên liệu (không tính Streak). Làm lại sai tiếp sẽ bị khóa nút Làm lại.</li>
       </ul>
       <i>Tàu sẽ cất cánh khi nhiên liệu đủ 80% trở lên, mong các phi hành gia trợ giúp!</i>
     </div>
@@ -487,15 +487,15 @@
         btn.className = "option-btn";
         btn.innerText = opt;
         
-        // Nếu đã từng trả lời câu này
+        // Nếu đã chọn câu này rồi
         if (state.userChoice !== null) {
           btn.disabled = true;
+          // Tô màu lựa chọn của người dùng
           if (index === state.userChoice) {
             btn.classList.add(state.isCorrect ? "correct" : "wrong");
           }
-          
-          // Chỉ tô xanh đáp án đúng nếu trả lời ĐÚNG, hoặc nếu đã thử lại lần 2 mà vẫn SAI
-          if ((state.isCorrect || state.retryFailed) && index === qData.answer) {
+          // TUYỆT ĐỐI CHỈ TÔ XANH NẾU NGƯỜI DÙNG TRẢ LỜI ĐÚNG
+          if (state.isCorrect && index === qData.answer) {
             btn.classList.add("correct");
           }
         } else {
@@ -536,15 +536,13 @@
           fuelLevel = Math.min(100, fuelLevel + addFuel);
         }
       } else {
+        // SAI -> CHỈ TÔ ĐỎ NÚT ĐÃ BẤM, KHÔNG TÔ XANH ĐÁP ÁN ĐÚNG!
         clickedBtn.classList.add("wrong");
         state.isCorrect = false;
 
         if (state.retried) {
-          // Làm lại lần 2 mà vẫn sai -> Hiện đáp án đúng để học hỏi và khóa nút Làm lại
-          allButtons[correctIdx].classList.add("correct");
           state.retryFailed = true;
         } else {
-          // Lần 1 sai -> KHÔNG HIỆN ĐÁP ÁN ĐÚNG
           streakCount = 0;
           fuelLevel = Math.max(0, fuelLevel - 10);
         }
